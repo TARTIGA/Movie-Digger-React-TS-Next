@@ -9,6 +9,7 @@ import {
   VideoBtnRow,
   VideoMoreBtn,
   AdditionalInfo,
+  VideoItemRootInModal,
   VideoInfoAdditional,
   AdditionalRow,
   AdditionalLabel,
@@ -52,7 +53,7 @@ export const VideoItem = ({
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2,
+      items: 1,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
@@ -139,6 +140,9 @@ export const VideoItem = ({
               ))}
             </AdditionalRow>
           )}
+          <VideoBtnRow>
+            <VideoMoreBtn onClick={handleAdditional}>Close Info</VideoMoreBtn>
+          </VideoBtnRow>
         </VideoInfoAdditional>
       </>
     )
@@ -165,7 +169,36 @@ export const VideoItem = ({
       </VideoItemRoot>
     )
   }
+  const renderContentInModal = () => {
+    return (
+      <ModalComponent
+        isOpen={activeAdditional}
+        onRequestClose={handleAdditional}
+      >
+        <VideoItemRootInModal
+          activeAdditional={activeAdditional}
+          onClick={handleClick}
+        >
+          <Carousel
+            responsive={responsive}
+            ssr={true}
+            swipeable={false}
+            infinite={true}
+            autoPlay={activeVideo}
+            autoPlaySpeed={1000}
+            transitionDuration={200}
+            removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
+          >
+            {picture.map(({ id, path }) => (
+              <img src={path} alt={path} key={id} />
+            ))}
+          </Carousel>
+          {activeAdditional ? renderInfoAdditional() : renderInfoNormal()}
+        </VideoItemRootInModal>
+      </ModalComponent>
+    )
+  }
 
-  return renderContent()
+  return activeAdditional && isMobile ? renderContentInModal() : renderContent()
 }
 export default VideoItem

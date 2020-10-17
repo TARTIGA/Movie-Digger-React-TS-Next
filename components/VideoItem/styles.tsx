@@ -12,6 +12,11 @@ export const VideoItemRoot = styled.div`
   padding: ${(props) => (props.activeAdditional ? "5px" : "0")};
 `
 
+export const VideoItemRootInModal = styled(VideoItemRoot)`
+  border: none;
+  padding: 15px;
+`
+
 export const VideoImages = styled.div`
   display: flex;
   min-width: 240px;

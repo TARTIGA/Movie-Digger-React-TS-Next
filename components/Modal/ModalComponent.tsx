@@ -1,5 +1,6 @@
 import { ReactChild } from "react"
 import Modal from "react-modal"
+import styled from "styled-components"
 Modal.setAppElement("#__next")
 const defaultStyle = {
   content: {
@@ -9,6 +10,7 @@ const defaultStyle = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    backgroundColor: "#000",
   },
 }
 const ModalComponent = ({
@@ -23,17 +25,29 @@ const ModalComponent = ({
       onRequestClose={onRequestClose}
       style={style || defaultStyle}
     >
-      {children}
+      <>
+        <BtnModalClose onClick={onRequestClose}>&times;</BtnModalClose>
+        {children}
+      </>
     </Modal>
   )
 }
 export default ModalComponent
+const BtnModalClose = styled.button`
+  background: #000;
+  color: #fff;
+  position: absolute;
+  border: none;
+  font-size: 32px;
+  right: 10px;
+  top: -8px;
+`
 ModalComponent.defaultProps = {
   isOpen: false,
 }
 type TModalType = {
   isOpen: boolean
   onRequestClose: () => void
-  style: {}
+  style?: {}
   children: ReactChild
 }

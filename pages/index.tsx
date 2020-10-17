@@ -43,9 +43,9 @@ export const Home = () => {
     if (isActiveAdditional) {
       setActiveAdditional(null)
     } else {
-      if (!isMobile) {
-        setActiveAdditional(id)
-      }
+      // if (!isMobile) {
+      setActiveAdditional(id)
+      // }
     }
   }
   const getActiveVideoState = ({ id }: TVideoItem) => {
@@ -85,9 +85,6 @@ export const Home = () => {
         </VideosContainer>
         <FooterRow>{FOOTER_TEXT}</FooterRow>
       </Container>
-      {/* <ModalComponent isOpen={isShowing} onRequestClose={toggle}>
-        111111111111111
-      </ModalComponent> */}
     </Wrapper>
   )
 }
