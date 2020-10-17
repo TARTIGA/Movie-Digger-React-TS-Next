@@ -22,7 +22,10 @@ import type { TVideoItem } from "../../types"
 import Carousel from "react-multi-carousel"
 import "react-multi-carousel/lib/styles.css"
 import useMedia from "use-media"
-import ModalComponent from "../Modal/ModalComponent"
+import dynamic from "next/dynamic"
+const ModalComponent = dynamic(() => import("../Modal/ModalComponent"), {
+  loading: () => <p>...</p>,
+})
 
 export const VideoItem = ({
   video,
@@ -164,7 +167,7 @@ export const VideoItem = ({
           removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
         >
           {picture.map(({ id, path }) => (
-            <ImgPornItem src={path} alt={path} key={id} />
+            <ImgPornItem src={path} alt={`${description}-${id}`} key={id} />
           ))}
         </Carousel>
         {activeAdditional ? renderInfoAdditional() : renderInfoNormal()}

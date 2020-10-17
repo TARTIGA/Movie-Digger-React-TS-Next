@@ -1,24 +1,31 @@
-import Head from 'next/head';
+import { useEffect } from "react"
+import { useRouter } from "next/router"
+import Head from "next/head"
 // import App from 'next/app'
 import { SITE_NAME } from "../constants"
 
-export const MyApp = ({ Component, pageProps }) =>  {
+export const MyApp = ({ Component, pageProps }) => {
+  const { pathname } = useRouter()
+  const lang = pathname.startsWith("/en") ? "en" : "ru"
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
+
   return (
     <>
       <Head>
-          <title>{SITE_NAME}</title>
-          <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <meta name="description" content={SITE_NAME} />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,700&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
+        <title>{SITE_NAME}</title>
+        <meta charSet="utf-8" />
+        <meta name="description" content={SITE_NAME} />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,700&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <Component {...pageProps} />
     </>
   )

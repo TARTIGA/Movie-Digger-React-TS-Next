@@ -3,13 +3,13 @@ import Head from "next/head"
 import { SITE_NAME, FOOTER_TEXT } from "../constants"
 import styled from "styled-components"
 import { GlobalStyleReset } from "../styles"
-import VideoItem from "../components/VideoItem/VideoItem"
 import data from "../data"
 import numberFormatter from "../utils/numberFormatter"
 import type { TVideoItem } from "../types"
 import useMedia from "use-media"
 import useModal from "../utils/useModal"
-import ModalComponent from "../components/Modal/ModalComponent"
+import dynamic from "next/dynamic"
+const VideoItem = dynamic(() => import("../components/VideoItem/VideoItem"))
 
 export const Home = () => {
   const [activeVideo, setActiveVideo] = useState(null)
