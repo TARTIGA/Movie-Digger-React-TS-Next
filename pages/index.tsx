@@ -1,18 +1,49 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import Head from "next/head"
 import { SITE_NAME, FOOTER_TEXT } from "../constants"
 import styled from "styled-components"
 import { GlobalStyleReset } from "../styles"
-import VideoItem from '../components/VideoItem/VideoItem'
+import VideoItem from "../components/VideoItem/VideoItem"
 import data from "../data"
-import numberFormatter from '../utils/numberFormatter'
-
+import numberFormatter from "../utils/numberFormatter"
+import type { TVideoItem } from "../types"
 
 export const Home = () => {
-  const {info:{total,search_term},item:videosArray} = data
+  const [activeVideo, setActiveVideo] = useState(null)
+  const [activeAdditional, setActiveAdditional] = useState(null)
+  const {
+    info: { total, search_term },
+    item: videosArray,
+  } = data
   useEffect(() => {
-    console.log(['videosArray',videosArray ])
+    console.log(["videosArray", videosArray])
   }, [])
+
+  const toggleActive = ({ id }: TVideoItem) => {
+    const isActiveVideo = activeVideo === id
+    if (isActiveVideo) {
+      setActiveVideo(null)
+    } else {
+      setActiveVideo(id)
+    }
+  }
+
+  const toggleActiveAdditional = (item) => {
+    toggleActive(item)
+    const { id } = item
+    const isActiveAdditional = activeVideo === id
+    if (isActiveAdditional) {
+      setActiveAdditional(null)
+    } else {
+      setActiveAdditional(id)
+    }
+  }
+  const getActiveVideoState = ({ id }: TVideoItem) => {
+    return activeVideo === id
+  }
+  const getActiveAdditional = ({ id }: TVideoItem) => {
+    return activeAdditional === id
+  }
   return (
     <Wrapper>
       <GlobalStyleReset />
@@ -21,19 +52,28 @@ export const Home = () => {
           <H1Title>{SITE_NAME}</H1Title>
         </HeaderRow>
         <InfoRow>
-          <InfoTagLabel>Best <MainTag>{search_term}</MainTag> porn videos</InfoTagLabel>
-          <InfoTotalLabel>Total videos: {numberFormatter(total)} </InfoTotalLabel>
+          <InfoTagLabel>
+            Best <MainTag>{search_term}</MainTag> porn videos
+          </InfoTagLabel>
+          <InfoTotalLabel>
+            Total videos: {numberFormatter(total)}{" "}
+          </InfoTotalLabel>
         </InfoRow>
         <VideosContainer>
           <VideosList>
-            {videosArray.map((item)=> 
-               <VideoItem key={item.id} video={item}></VideoItem>
-            )}
+            {videosArray.map((item: TVideoItem) => (
+              <VideoItem
+                key={item.id}
+                video={item}
+                activeVideo={getActiveVideoState(item)}
+                activeAdditional={getActiveAdditional(item)}
+                handleClick={() => toggleActive(item)}
+                handleAdditional={() => toggleActiveAdditional(item)}
+              />
+            ))}
           </VideosList>
         </VideosContainer>
-        <FooterRow>
-	       {FOOTER_TEXT}
-        </FooterRow>
+        <FooterRow>{FOOTER_TEXT}</FooterRow>
       </Container>
     </Wrapper>
   )
@@ -70,14 +110,14 @@ const InfoRow = styled.div`
   justify-content: space-between;
   height: 50px;
   color: #fff;
-  padding:0 10px;
+  padding: 0 10px;
 `
 const InfoTagLabel = styled.div`
- font-size:20px;
+  font-size: 20px;
 `
 
 const InfoTotalLabel = styled.div`
-   font-size:14px;
+  font-size: 14px;
 `
 
 const H1Title = styled.h1`
@@ -90,29 +130,28 @@ const H1Title = styled.h1`
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `
 const MainTag = styled.span`
- text-transform:uppercase;
+  text-transform: uppercase;
 `
 const VideosContainer = styled.div`
   width: 100%;
   height: 100vh;
-  padding:5px;
-  background-color:#424245;
-  overflow-y:auto;
+  padding: 5px;
+  background-color: #424245;
+  overflow-y: auto;
 `
 
-
 const VideosList = styled.div`
-  display:flex;
+  display: flex;
   gap: 10px;
   flex-flow: row wrap;
 `
 
 const FooterRow = styled.footer`
-   background: #000;
-   display:flex;
-   width:100%;
-   color:#fff;
-   padding:5px;
-   align-items:center;
-   font-size:14px;
+  background: #000;
+  display: flex;
+  width: 100%;
+  color: #fff;
+  padding: 5px;
+  align-items: center;
+  font-size: 14px;
 `
