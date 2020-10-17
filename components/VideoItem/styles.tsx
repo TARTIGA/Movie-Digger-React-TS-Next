@@ -97,6 +97,7 @@ export const VideoMoreBtn = styled.button`
   justify-content: center;
   border: none;
   width: 300px;
+  cursor: pointer;
   @media (max-width: 768px) {
     font-size: 20px;
     height: 42px;
@@ -113,4 +114,12 @@ export const AdditionalInfo = styled.div`
   max-width: 320px;
   color: #fff;
   flex-direction: column;
+`
+
+export const ImgPornItem = styled.img`
+  cursor: pointer;
+  &:hover {
+    outline: 1px solid #a5a5a5;
+    outline-offset: -1px;
+  }
 `

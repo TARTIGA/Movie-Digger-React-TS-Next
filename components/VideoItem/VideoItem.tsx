@@ -15,6 +15,7 @@ import {
   AdditionalLabel,
   VideoPornstarItem,
   VideWebcamItem,
+  ImgPornItem,
 } from "./styles"
 // import Slider from "react-slick-ssr"
 import type { TVideoItem } from "../../types"
@@ -154,7 +155,8 @@ export const VideoItem = ({
         <Carousel
           responsive={responsive}
           ssr={true}
-          swipeable={false}
+          draggable={false}
+          swipeable={isMobile}
           infinite={true}
           autoPlay={activeVideo}
           autoPlaySpeed={1000}
@@ -162,7 +164,7 @@ export const VideoItem = ({
           removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
         >
           {picture.map(({ id, path }) => (
-            <img src={path} alt={path} key={id} />
+            <ImgPornItem src={path} alt={path} key={id} />
           ))}
         </Carousel>
         {activeAdditional ? renderInfoAdditional() : renderInfoNormal()}
