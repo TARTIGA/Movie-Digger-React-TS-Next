@@ -19,6 +19,8 @@ import {
 import type { TVideoItem } from "../../types"
 import Carousel from "react-multi-carousel"
 import "react-multi-carousel/lib/styles.css"
+import useMedia from "use-media"
+import ModalComponent from "../Modal/ModalComponent"
 
 export const VideoItem = ({
   video,
@@ -38,7 +40,7 @@ export const VideoItem = ({
     pornstar,
     webcam,
   }: TVideoItem = video
-
+  const isMobile = useMedia({ maxWidth: 480 })
   useEffect(() => {
     console.log(["active", activeVideo])
   }, [activeVideo])
@@ -57,7 +59,7 @@ export const VideoItem = ({
       items: 1,
     },
   }
-
+  //render Normal InfoState
   const renderInfoNormal = () => {
     return (
       <>
@@ -79,7 +81,7 @@ export const VideoItem = ({
       </>
     )
   }
-
+  //render Additional InfoState
   const renderInfoAdditional = () => {
     return (
       <>
@@ -141,26 +143,29 @@ export const VideoItem = ({
       </>
     )
   }
+  //Render ALL  content
+  const renderContent = () => {
+    return (
+      <VideoItemRoot activeAdditional={activeAdditional} onClick={handleClick}>
+        <Carousel
+          responsive={responsive}
+          ssr={true}
+          swipeable={false}
+          infinite={true}
+          autoPlay={activeVideo}
+          autoPlaySpeed={1000}
+          transitionDuration={200}
+          removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
+        >
+          {picture.map(({ id, path }) => (
+            <img src={path} alt={path} key={id} />
+          ))}
+        </Carousel>
+        {activeAdditional ? renderInfoAdditional() : renderInfoNormal()}
+      </VideoItemRoot>
+    )
+  }
 
-  return (
-    <VideoItemRoot activeAdditional={activeAdditional} onClick={handleClick}>
-      <Carousel
-        responsive={responsive}
-        ssr={true}
-        swipeable={false}
-        infinite={true}
-        autoPlay={activeVideo}
-        autoPlaySpeed={1000}
-        transitionDuration={200}
-        removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
-      >
-        {picture.map(({ id, path }) => (
-          <img src={path} alt={path} key={id} />
-        ))}
-      </Carousel>
-      {activeAdditional ? renderInfoAdditional() : renderInfoNormal()}
-      {/* {activeAdditional && <AdditionalInfo>111</AdditionalInfo>} */}
-    </VideoItemRoot>
-  )
+  return renderContent()
 }
 export default VideoItem

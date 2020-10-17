@@ -92,6 +92,10 @@ export const VideoMoreBtn = styled.button`
   justify-content: center;
   border: none;
   width: 300px;
+  @media (max-width: 768px) {
+    font-size: 20px;
+    height: 42px;
+  }
 `
 export const VideoImgContainer = styled.div`
   display: flex;

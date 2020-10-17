@@ -85,9 +85,9 @@ export const Home = () => {
         </VideosContainer>
         <FooterRow>{FOOTER_TEXT}</FooterRow>
       </Container>
-      <ModalComponent isOpen={isShowing} onRequestClose={toggle}>
+      {/* <ModalComponent isOpen={isShowing} onRequestClose={toggle}>
         111111111111111
-      </ModalComponent>
+      </ModalComponent> */}
     </Wrapper>
   )
 }
