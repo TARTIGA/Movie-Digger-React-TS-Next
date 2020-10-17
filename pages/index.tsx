@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { GlobalStyleReset } from "../styles"
 import data from "../data"
 import numberFormatter from '../utils/numberFormatter'
+import firstLCapitalize from '../utils/firstLCapitalize'
 
 export const Home = () => {
   const {info:{total,search_term},item} = data
@@ -24,17 +25,32 @@ export const Home = () => {
         </InfoRow>
         <VideosContainer>
           <VideosList>
-            {item.map(({id,source,description,picture,tag,pornstar})=> 
+            {item.map(({id,source,added,duration, description,picture,tag,pornstar})=> 
                 <VideoItem key={id}>
                   <VideoImages >
-                  {picture.map(({id,path})=>
+                  {/* {picture.map(({id,path})=>
                    <img src={path} alt={path}/>
-                  )}
+                  )} */}
+                   <img src={picture[0].path} alt={picture[0].path}/>
                   </VideoImages>
-                  <div>{description}</div>
+                  {/* <div>{description}</div>
                  {pornstar.map((star)=>
                    <div>{star}</div>
-                 )}
+                 )} */}
+                 <VideoInfo>
+                <div>Added: {added}</div>
+                <div>Duration:{duration}</div>
+                 </VideoInfo>
+                 <VideoTitle>{description}</VideoTitle>
+                 <VideoTags>
+                   {tag.map((item,idx)=>
+                   <VideoTagItem key={idx.toString()}>
+                      {firstLCapitalize(item)}
+                   </VideoTagItem>)}
+                 </VideoTags>
+                 <VideoBtnRow>
+                   <VideoMoreBtn>More Info</VideoMoreBtn>
+                   </VideoBtnRow>
                 </VideoItem>
             )}
           </VideosList>
@@ -116,18 +132,69 @@ const VideosList = styled.div`
 `
 const VideoItem = styled.div`
   display:flex;
-  height:200px;
   width:100%;
   min-width:240px;
   max-width:320px;
-  background-color:#000;
   color:#fff;
   flex-direction:column;
 `
 const VideoImages = styled.div`
   display:flex;
   width:100%;
-  height:80%;
+  height:200px;
+`
+const VideoInfo = styled.div`
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  font-size:10px;
+  font-weight:400;
+  margin-top:5px;
+`
+const VideoTitle = styled.div`
+  display:flex;
+  font-size:14px;
+  font-weight:400;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 5px 0;
+  align-items:center;
+  display: inline-block;
+`
+const VideoTags = styled.div`
+  display:flex;
+  gap: 4px;
+  margin-bottom: 15px;
+  overflow:hidden;
+`
+const VideoTagItem = styled.div`
+  padding:3px;
+  border-radius: 4px;
+  background: #646464;
+  max-height:24px;
+  text-align:center;
+  display: inline-block;
+  font-size:14px;
+
+`
+const VideoBtnRow = styled.div`
+display:flex;
+align-items:center;
+justify-content:center;
+width:100%;
+`
+const VideoMoreBtn= styled.button`
+background: #2C2C2F;
+border-radius: 3px;
+width:100%;
+font-size:14px;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+border: none;
+width:300px;
 `
 
 const FooterRow = styled.footer`
