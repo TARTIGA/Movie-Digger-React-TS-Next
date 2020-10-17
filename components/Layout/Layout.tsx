@@ -1,4 +1,4 @@
-import {SITE_NAME} from '../constants'
+import { SITE_NAME } from "../../constants"
 const Layout = () => {
   return (
     <div>
@@ -6,4 +6,4 @@ const Layout = () => {
     </div>
   )
 }
-export default Layout;
+export default Layout
