@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import firstLCapitalize from "../../utils/firstLCapitalize"
 import {
   VideoItemRoot,
-  VideoImages,
   VideoInfo,
   VideoTitle,
   VideoTags,
@@ -10,6 +9,11 @@ import {
   VideoBtnRow,
   VideoMoreBtn,
   AdditionalInfo,
+  VideoInfoAdditional,
+  AdditionalRow,
+  AdditionalLabel,
+  VideoPornstarItem,
+  VideWebcamItem,
 } from "./styles"
 // import Slider from "react-slick-ssr"
 import type { TVideoItem } from "../../types"
@@ -32,6 +36,7 @@ export const VideoItem = ({
     picture,
     tag,
     pornstar,
+    webcam,
   }: TVideoItem = video
 
   useEffect(() => {
@@ -53,6 +58,90 @@ export const VideoItem = ({
     },
   }
 
+  const renderInfoNormal = () => {
+    return (
+      <>
+        <VideoInfo>
+          <div>Added: {added}</div>
+          <div>Duration:{duration}</div>
+        </VideoInfo>
+        <VideoTitle>{description}</VideoTitle>
+        <VideoTags>
+          {tag.map((item, idx) => (
+            <VideoTagItem key={idx.toString()}>
+              {firstLCapitalize(item)}
+            </VideoTagItem>
+          ))}
+        </VideoTags>
+        <VideoBtnRow>
+          <VideoMoreBtn onClick={handleAdditional}>More Info</VideoMoreBtn>
+        </VideoBtnRow>
+      </>
+    )
+  }
+
+  const renderInfoAdditional = () => {
+    return (
+      <>
+        <VideoInfoAdditional>
+          <AdditionalRow>
+            {" "}
+            <AdditionalLabel>Added:</AdditionalLabel>
+            {added}
+          </AdditionalRow>
+          <AdditionalRow>
+            {" "}
+            <AdditionalLabel>Duration:</AdditionalLabel>
+            {duration}
+          </AdditionalRow>
+          <AdditionalRow>
+            {" "}
+            <AdditionalLabel>Source:</AdditionalLabel>
+            {source}
+          </AdditionalRow>
+          <AdditionalRow>
+            {" "}
+            <AdditionalLabel>Description:</AdditionalLabel>
+            {description}
+          </AdditionalRow>
+          {!!tag.length && (
+            <AdditionalRow>
+              {" "}
+              <AdditionalLabel>Tags:</AdditionalLabel>
+              {tag.map((item, idx) => (
+                <VideoTagItem key={idx.toString()}>
+                  {firstLCapitalize(item)}
+                </VideoTagItem>
+              ))}
+            </AdditionalRow>
+          )}
+          {!!pornstar.length && (
+            <AdditionalRow>
+              {" "}
+              <AdditionalLabel>Pornstars:</AdditionalLabel>
+              {pornstar.map((item, idx) => (
+                <VideoPornstarItem key={idx.toString()}>
+                  {firstLCapitalize(item)}
+                </VideoPornstarItem>
+              ))}
+            </AdditionalRow>
+          )}
+          {!!webcam.length && (
+            <AdditionalRow>
+              {" "}
+              <AdditionalLabel>Webcam Model:</AdditionalLabel>
+              {webcam.map((item, idx) => (
+                <VideWebcamItem key={idx.toString()}>
+                  {firstLCapitalize(item)}
+                </VideWebcamItem>
+              ))}
+            </AdditionalRow>
+          )}
+        </VideoInfoAdditional>
+      </>
+    )
+  }
+
   return (
     <VideoItemRoot activeAdditional={activeAdditional} onClick={handleClick}>
       <Carousel
@@ -69,22 +158,8 @@ export const VideoItem = ({
           <img src={path} alt={path} key={id} />
         ))}
       </Carousel>
-      <VideoInfo>
-        <div>Added: {added}</div>
-        <div>Duration:{duration}</div>
-      </VideoInfo>
-      <VideoTitle>{description}</VideoTitle>
-      <VideoTags>
-        {tag.map((item, idx) => (
-          <VideoTagItem key={idx.toString()}>
-            {firstLCapitalize(item)}
-          </VideoTagItem>
-        ))}
-      </VideoTags>
-      <VideoBtnRow>
-        <VideoMoreBtn onClick={handleAdditional}>More Info</VideoMoreBtn>
-      </VideoBtnRow>
-      {activeAdditional && <AdditionalInfo>111</AdditionalInfo>}
+      {activeAdditional ? renderInfoAdditional() : renderInfoNormal()}
+      {/* {activeAdditional && <AdditionalInfo>111</AdditionalInfo>} */}
     </VideoItemRoot>
   )
 }

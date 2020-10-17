@@ -86,12 +86,12 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: 100%;
 `
 const Container = styled.div`
   display: flex;
   width: 100%;
   max-width: 1340px;
-  height: 100vh;
   flex-direction: column;
 `
 
@@ -134,16 +134,19 @@ const MainTag = styled.span`
 `
 const VideosContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   padding: 5px;
   background-color: #424245;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 `
 
 const VideosList = styled.div`
   display: flex;
   gap: 10px;
   flex-flow: row wrap;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `
 
 const FooterRow = styled.footer`
@@ -151,7 +154,10 @@ const FooterRow = styled.footer`
   display: flex;
   width: 100%;
   color: #fff;
-  padding: 5px;
+  padding: 25px 5px;
   align-items: center;
   font-size: 14px;
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
 `

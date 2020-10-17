@@ -6,18 +6,28 @@ export const VideoItemRoot = styled.div`
   max-width: 320px;
   color: #fff;
   flex-direction: column;
-  &:after {
-    content: "111";
-  }
   background-color: ${(props) => (props.activeAdditional ? "#000" : "none")};
   border: ${(props) => (props.activeAdditional ? " 1px solid red" : "none")};
   box-sizing: content-box;
+  padding: ${(props) => (props.activeAdditional ? "5px" : "0")};
 `
 
 export const VideoImages = styled.div`
   display: flex;
-  max-width: 320px;
   min-width: 240px;
+`
+export const VideoInfoAdditional = styled.div`
+  display: flex;
+  padding: 20px 0;
+  flex-direction: column;
+  font-size: 14px;
+`
+export const AdditionalRow = styled.div`
+  margin-bottom: 20px;
+`
+export const AdditionalLabel = styled.span`
+  font-weight: 600;
+  margin-right: 5px;
 `
 export const VideoInfo = styled.div`
   display: flex;
@@ -40,11 +50,13 @@ export const VideoTitle = styled.div`
 `
 export const VideoTags = styled.div`
   display: flex;
-  gap: 4px;
   margin-bottom: 15px;
   overflow: hidden;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
-export const VideoTagItem = styled.div`
+export const TagItem = styled.div`
   padding: 3px;
   border-radius: 4px;
   background: #646464;
@@ -52,6 +64,16 @@ export const VideoTagItem = styled.div`
   text-align: center;
   display: inline-block;
   font-size: 14px;
+  margin: 3px;
+`
+export const VideoTagItem = styled(TagItem)`
+  background: #646464;
+`
+export const VideoPornstarItem = styled(TagItem)`
+  background: #0959cf;
+`
+export const VideWebcamItem = styled(TagItem)`
+  background: #32a567;
 `
 export const VideoBtnRow = styled.div`
   display: flex;
