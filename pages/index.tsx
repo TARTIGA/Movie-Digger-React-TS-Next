@@ -7,17 +7,22 @@ import VideoItem from "../components/VideoItem/VideoItem"
 import data from "../data"
 import numberFormatter from "../utils/numberFormatter"
 import type { TVideoItem } from "../types"
+import useMedia from "use-media"
+import useModal from "../utils/useModal"
+import ModalComponent from "../components/Modal/ModalComponent"
 
 export const Home = () => {
   const [activeVideo, setActiveVideo] = useState(null)
   const [activeAdditional, setActiveAdditional] = useState(null)
+  const { isShowing, toggle } = useModal()
+  const isMobile = useMedia({ maxWidth: 480 })
   const {
     info: { total, search_term },
     item: videosArray,
   } = data
   useEffect(() => {
-    console.log(["videosArray", videosArray])
-  }, [])
+    console.log(["isMobile", isMobile])
+  }, [isMobile])
 
   const toggleActive = ({ id }: TVideoItem) => {
     const isActiveVideo = activeVideo === id
@@ -30,12 +35,17 @@ export const Home = () => {
 
   const toggleActiveAdditional = (item) => {
     toggleActive(item)
+    if (isMobile) {
+      toggle()
+    }
     const { id } = item
     const isActiveAdditional = activeVideo === id
     if (isActiveAdditional) {
       setActiveAdditional(null)
     } else {
-      setActiveAdditional(id)
+      if (!isMobile) {
+        setActiveAdditional(id)
+      }
     }
   }
   const getActiveVideoState = ({ id }: TVideoItem) => {
@@ -75,6 +85,9 @@ export const Home = () => {
         </VideosContainer>
         <FooterRow>{FOOTER_TEXT}</FooterRow>
       </Container>
+      <ModalComponent isOpen={isShowing} onRequestClose={toggle}>
+        111111111111111
+      </ModalComponent>
     </Wrapper>
   )
 }
