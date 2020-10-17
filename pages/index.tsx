@@ -17,23 +17,17 @@ export const Home = () => {
           <H1Title>{SITE_NAME}</H1Title>
         </HeaderRow>
         <InfoRow>
-          <div>Best <MainTag>{search_term}</MainTag> porn videos</div>
-          <div>Total videos: {numberFormatter(total)} </div>
+          <InfoTagLabel>Best <MainTag>{search_term}</MainTag> porn videos</InfoTagLabel>
+          <InfoTotalLabel>Total videos: {numberFormatter(total)} </InfoTotalLabel>
         </InfoRow>
         <VideosContainer>
           <VideosList>
-            <VideItem></VideItem>
-            <VideItem></VideItem>
-            <VideItem></VideItem>
-            <VideItem></VideItem>
-            <VideItem></VideItem>
-            <VideItem></VideItem>
-            <VideItem></VideItem>
-            <VideItem></VideItem>
-            <VideItem></VideItem>
-            <VideItem></VideItem>
-            <VideItem></VideItem>
-            <VideItem></VideItem>
+            <VideItem>1</VideItem>
+            <VideItem>2</VideItem>
+            <VideItem>3</VideItem>
+            <VideItem>4</VideItem>
+            <VideItem>5</VideItem>
+            <VideItem>6</VideItem>
           </VideosList>
         </VideosContainer>
         <FooterRow>
@@ -59,7 +53,8 @@ const Container = styled.div`
   height: 100vh;
   flex-direction: column;
 `
-const HeaderRow = styled.div`
+
+const HeaderRow = styled.header`
   color: #fff;
   align-items: center;
   justify-content: space-around;
@@ -72,11 +67,17 @@ const InfoRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
+  height: 50px;
   color: #fff;
   padding:0 10px;
 `
+const InfoTagLabel = styled.div`
+ font-size:20px;
+`
 
+const InfoTotalLabel = styled.div`
+   font-size:14px;
+`
 
 const H1Title = styled.h1`
   font-weight: 400;
@@ -99,14 +100,15 @@ const VideosContainer = styled.div`
 `
 const VideosList = styled.div`
   display:flex;
-  flex-wrap: wrap;
-  flex-direction:row;
   gap: 10px;
+  flex-flow: row wrap;
 `
 const VideItem = styled.div`
   display:flex;
   height:200px;
-  width:320px;
+  width:100%;
+  min-width:240px;
+  max-width:320px;
   background-color:#000;
 `
 
