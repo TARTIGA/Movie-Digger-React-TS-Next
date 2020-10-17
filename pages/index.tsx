@@ -8,7 +8,9 @@ import numberFormatter from '../utils/numberFormatter'
 
 export const Home = () => {
   const {info:{total,search_term},item} = data
-  useEffect(() => {}, [])
+  useEffect(() => {
+    console.log(['itemitem',item ])
+  }, [])
   return (
     <Wrapper>
       <GlobalStyleReset />
@@ -22,12 +24,19 @@ export const Home = () => {
         </InfoRow>
         <VideosContainer>
           <VideosList>
-            <VideItem>1</VideItem>
-            <VideItem>2</VideItem>
-            <VideItem>3</VideItem>
-            <VideItem>4</VideItem>
-            <VideItem>5</VideItem>
-            <VideItem>6</VideItem>
+            {item.map(({id,source,description,picture,tag,pornstar})=> 
+                <VideoItem key={id}>
+                  <VideoImages >
+                  {picture.map(({id,path})=>
+                   <img src={path} alt={path}/>
+                  )}
+                  </VideoImages>
+                  <div>{description}</div>
+                 {pornstar.map((star)=>
+                   <div>{star}</div>
+                 )}
+                </VideoItem>
+            )}
           </VideosList>
         </VideosContainer>
         <FooterRow>
@@ -98,18 +107,27 @@ const VideosContainer = styled.div`
   background-color:#424245;
   overflow-y:auto;
 `
+
+
 const VideosList = styled.div`
   display:flex;
   gap: 10px;
   flex-flow: row wrap;
 `
-const VideItem = styled.div`
+const VideoItem = styled.div`
   display:flex;
   height:200px;
   width:100%;
   min-width:240px;
   max-width:320px;
   background-color:#000;
+  color:#fff;
+  flex-direction:column;
+`
+const VideoImages = styled.div`
+  display:flex;
+  width:100%;
+  height:80%;
 `
 
 const FooterRow = styled.footer`
