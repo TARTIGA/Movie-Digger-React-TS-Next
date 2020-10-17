@@ -1,7 +1,8 @@
 import Head from 'next/head';
+// import App from 'next/app'
 import { SITE_NAME } from "../constants"
 
-export const App = ({ Component, pageProps }) =>  {
+export const MyApp = ({ Component, pageProps }) =>  {
   return (
     <>
       <Head>
@@ -22,5 +23,11 @@ export const App = ({ Component, pageProps }) =>  {
     </>
   )
 }
+// MyApp.getInitialProps = async (appContext) => {
+//   // calls page's `getInitialProps` and fills `appProps.pageProps`
+//   const appProps = await App.getInitialProps(appContext);
 
-export default App
+//   return { ...appProps }
+// }
+
+export default MyApp
