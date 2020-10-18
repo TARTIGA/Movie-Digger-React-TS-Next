@@ -179,6 +179,7 @@ const VideosList = styled.div(
     display: flex;
     gap: 10px;
     flex-flow: row wrap;
+    min-height: 100vh;
     @media (max-width: 768px) {
       justify-content: center;
     }
