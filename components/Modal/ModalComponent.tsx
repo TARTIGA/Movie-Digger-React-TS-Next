@@ -2,6 +2,9 @@ import { ReactChild } from "react"
 import Modal from "react-modal"
 import styled, { css } from "styled-components"
 Modal.setAppElement("#__next")
+/**
+ * Default modal styles
+ */
 const defaultStyle = {
   content: {
     top: "50%",

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import firstLCapitalize from "../../utils/firstLCapitalize"
+import useMedia from "use-media"
 import {
   VideoItemRoot,
   VideoInfo,
@@ -15,13 +16,10 @@ import {
   AdditionalLabel,
   VideoPornstarItem,
   VideWebcamItem,
-  LoaderImgItem,
 } from "./styles"
-// import Slider from "react-slick-ssr"
 import type { TVideoItem } from "../../types"
 import Carousel from "react-multi-carousel"
 import "react-multi-carousel/lib/styles.css"
-import useMedia from "use-media"
 import dynamic from "next/dynamic"
 const ModalComponent = dynamic(() => import("../Modal/ModalComponent"), {
   loading: () => <p>...</p>,
@@ -47,10 +45,10 @@ export const VideoItem = ({
     webcam,
   }: TVideoItem = video
   const isMobile = useMedia({ maxWidth: 480 })
-  // useEffect(() => {
-  //   console.log(["active", activeVideo])
-  // }, [activeVideo])
-  //Data for responsive Caricel
+
+  /**
+   * Caroucel data
+   */
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -65,7 +63,9 @@ export const VideoItem = ({
       items: 1,
     },
   }
-  //render Normal InfoState
+  /**
+   * Render Info block (!Additional)
+   */
   const renderInfoNormal = () => {
     return (
       <>
@@ -87,7 +87,9 @@ export const VideoItem = ({
       </>
     )
   }
-  //render Additional InfoState
+  /**
+   * Render Additional Info Block
+   */
   const renderInfoAdditional = () => {
     return (
       <>
@@ -152,7 +154,9 @@ export const VideoItem = ({
       </>
     )
   }
-  //Render ALL  content
+  /**
+   * Render Main Content Block
+   */
   const renderContent = () => {
     return (
       <VideoItemRoot activeAdditional={activeAdditional} onClick={handleClick}>
@@ -190,26 +194,12 @@ export const VideoItem = ({
           activeAdditional={activeAdditional}
           onClick={handleClick}
         >
-          <Carousel
-            responsive={responsive}
-            ssr={true}
-            swipeable={false}
-            infinite={true}
-            autoPlay={activeVideo}
-            autoPlaySpeed={1000}
-            transitionDuration={200}
-            removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
-          >
-            {picture.map(({ id, path }) => (
-              <img src={path} alt={path} key={id} />
-            ))}
-          </Carousel>
-          {activeAdditional ? renderInfoAdditional() : renderInfoNormal()}
+          {renderContent()}
         </VideoItemRootInModal>
       </ModalComponent>
     )
   }
-
+  /** Check Cards View for modal */
   return activeAdditional && isMobile ? renderContentInModal() : renderContent()
 }
 export default VideoItem

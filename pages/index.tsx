@@ -35,7 +35,10 @@ export const Home = () => {
   // useEffect(() => {
   //   console.log(["isMobile", isMobile])
   // }, [isMobile])
-
+  /**
+   * ToggleActive video card method
+   * @param param0
+   */
   const toggleActive = ({ id }: TVideoItem) => {
     const isActiveVideo = activeVideo === id
     if (isActiveVideo) {
@@ -44,7 +47,10 @@ export const Home = () => {
       setActiveVideo(id)
     }
   }
-
+  /**
+   * Toggle Active additional info (More Info btn)
+   * @param item
+   */
   const toggleActiveAdditional = (item) => {
     toggleActive(item)
     if (isMobile) {
@@ -60,19 +66,21 @@ export const Home = () => {
       // }
     }
   }
+  /**
+   * Getter Active video check
+   * @param param0
+   */
   const getActiveVideoState = ({ id }: TVideoItem) => {
     return activeVideo === id
   }
+  /**
+   * Getter Active Additional block check
+   * @param param0
+   */
   const getActiveAdditional = ({ id }: TVideoItem) => {
     return activeAdditional === id
   }
-  const Example = (key) => {
-    return <div key={key}>111</div>
-  }
-  const itemsList = []
-  for (var i = 0; i <= 100000; i++) {
-    itemsList.push(<Example key={"example-" + i}>{`${i}+1`}</Example>)
-  }
+
   return (
     <Wrapper>
       <GlobalStyleReset />
@@ -94,10 +102,10 @@ export const Home = () => {
               <LazyLoad
                 height={320}
                 offset={100}
+                key={item.id}
                 placeholder={<PlaceholderVideo />}
               >
                 <DynamicVideoItem
-                  key={item.id}
                   video={item}
                   activeVideo={getActiveVideoState(item)}
                   activeAdditional={getActiveAdditional(item)}

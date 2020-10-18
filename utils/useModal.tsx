@@ -2,8 +2,10 @@ import { useState } from "react"
 
 const useModal = () => {
   const [isShowing, setIsShowing] = useState(false)
-
-  function toggle() {
+  /**
+   * Method show/hide toggle view modal
+   */
+  const toggle = () => {
     setIsShowing(!isShowing)
   }
 
