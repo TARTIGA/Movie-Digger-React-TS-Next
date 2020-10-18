@@ -9,7 +9,13 @@ import type { TVideoItem } from "../types"
 import useMedia from "use-media"
 import useModal from "../utils/useModal"
 import dynamic from "next/dynamic"
-const VideoItem = dynamic(() => import("../components/VideoItem/VideoItem"))
+const DynamicVideoItem = dynamic(
+  () => import("../components/VideoItem/VideoItem"),
+  {
+    ssr: false,
+    loading: () => <p>...</p>,
+  }
+)
 
 export const Home = () => {
   const [activeVideo, setActiveVideo] = useState(null)
@@ -72,7 +78,7 @@ export const Home = () => {
         <VideosContainer>
           <VideosList>
             {videosArray.map((item: TVideoItem) => (
-              <VideoItem
+              <DynamicVideoItem
                 key={item.id}
                 video={item}
                 activeVideo={getActiveVideoState(item)}
