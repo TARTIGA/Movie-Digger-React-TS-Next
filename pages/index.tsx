@@ -248,7 +248,7 @@ const FooterRow = styled.footer(
     align-items: center;
     font-size: 14px;
     @media (max-width: 768px) {
-      font-size: 10px;
+      font-size: 12px;
     }
   `
 )
