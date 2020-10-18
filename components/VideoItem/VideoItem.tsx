@@ -15,7 +15,7 @@ import {
   AdditionalLabel,
   VideoPornstarItem,
   VideWebcamItem,
-  ImgPornItem,
+  LoaderImgItem,
 } from "./styles"
 // import Slider from "react-slick-ssr"
 import type { TVideoItem } from "../../types"
@@ -25,6 +25,9 @@ import useMedia from "use-media"
 import dynamic from "next/dynamic"
 const ModalComponent = dynamic(() => import("../Modal/ModalComponent"), {
   loading: () => <p>...</p>,
+})
+const ImgItemComponent = dynamic(() => import("../ImgItem/ImgItem"), {
+  loading: () => <LoaderImgItem />,
 })
 
 export const VideoItem = ({
@@ -157,17 +160,21 @@ export const VideoItem = ({
       <VideoItemRoot activeAdditional={activeAdditional} onClick={handleClick}>
         <Carousel
           responsive={responsive}
-          ssr={true}
+          ssr={false}
           draggable={false}
           swipeable={isMobile}
           infinite={true}
           autoPlay={activeVideo}
+          arrows={false}
           autoPlaySpeed={1000}
           transitionDuration={200}
-          removeArrowOnDeviceType={["desktop", "tablet", "mobile"]}
         >
           {picture.map(({ id, path }) => (
-            <ImgPornItem src={path} alt={`${description}-${id}`} key={id} />
+            <ImgItemComponent
+              src={path}
+              alt={`${description}-${id}`}
+              key={id}
+            />
           ))}
         </Carousel>
         {activeAdditional ? renderInfoAdditional() : renderInfoNormal()}

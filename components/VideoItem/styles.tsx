@@ -142,12 +142,10 @@ export const AdditionalInfo = styled.div(
   `
 )
 
-export const ImgPornItem = styled.img(
+export const LoaderImgItem = styled.div(
   (props) => css`
-    cursor: pointer;
-    &:hover {
-      outline: 1px solid #a5a5a5;
-      outline-offset: -1px;
-    }
+    width: 100%;
+    background-color: #646464;
+    min-height: 200px;
   `
 )
