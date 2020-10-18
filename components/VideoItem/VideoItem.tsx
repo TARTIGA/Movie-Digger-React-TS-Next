@@ -26,9 +26,7 @@ import dynamic from "next/dynamic"
 const ModalComponent = dynamic(() => import("../Modal/ModalComponent"), {
   loading: () => <p>...</p>,
 })
-const ImgItemComponent = dynamic(() => import("../ImgItem/ImgItem"), {
-  loading: () => <LoaderImgItem />,
-})
+import ImgItemComponent from "../ImgItem/ImgItem"
 
 export const VideoItem = ({
   video,
@@ -49,10 +47,10 @@ export const VideoItem = ({
     webcam,
   }: TVideoItem = video
   const isMobile = useMedia({ maxWidth: 480 })
-  useEffect(() => {
-    console.log(["active", activeVideo])
-  }, [activeVideo])
-
+  // useEffect(() => {
+  //   console.log(["active", activeVideo])
+  // }, [activeVideo])
+  //Data for responsive Caricel
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -181,6 +179,7 @@ export const VideoItem = ({
       </VideoItemRoot>
     )
   }
+  //Render content method
   const renderContentInModal = () => {
     return (
       <ModalComponent

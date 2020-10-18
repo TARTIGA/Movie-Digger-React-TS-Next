@@ -5,6 +5,8 @@ export const VideoItemRoot = styled.div(
     display: flex;
     width: 100%;
     max-width: 320px;
+    float: left;
+    /* height: 320px; */
     color: #fff;
     flex-direction: column;
     background-color: ${(props) => (props.activeAdditional ? "#000" : "none")};
@@ -139,13 +141,5 @@ export const AdditionalInfo = styled.div(
     max-width: 320px;
     color: #fff;
     flex-direction: column;
-  `
-)
-
-export const LoaderImgItem = styled.div(
-  (props) => css`
-    width: 100%;
-    background-color: #646464;
-    min-height: 200px;
   `
 )

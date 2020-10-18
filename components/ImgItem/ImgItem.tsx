@@ -1,7 +1,11 @@
 import styled, { css } from "styled-components"
-
+import LazyLoad from "react-lazyload-next"
 const ImgItem = ({ src, alt }: TImgItemType) => {
-  return <ImgPornItem src={src} alt={alt} />
+  return (
+    <LazyLoad height={200} placeholder={<LoaderImgItem />}>
+      <ImgPornItem src={src} alt={alt} />
+    </LazyLoad>
+  )
 }
 export default ImgItem
 export const ImgPornItem = styled.img(
@@ -21,3 +25,11 @@ type TImgItemType = {
   src: string
   alt: string
 }
+
+const LoaderImgItem = styled.div(
+  (props) => css`
+    width: 100%;
+    background-color: #646464;
+    min-height: 200px;
+  `
+)

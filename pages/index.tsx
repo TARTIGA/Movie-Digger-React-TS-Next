@@ -9,6 +9,8 @@ import type { TVideoItem } from "../types"
 import useMedia from "use-media"
 import useModal from "../utils/useModal"
 import dynamic from "next/dynamic"
+import LazyLoad from "react-lazyload-next"
+import VideoItem from "../components/VideoItem/VideoItem"
 const DynamicVideoItem = dynamic(
   () => import("../components/VideoItem/VideoItem"),
   {
@@ -16,6 +18,10 @@ const DynamicVideoItem = dynamic(
     loading: () => <p>...</p>,
   }
 )
+// const DynamicInfiniteGrid = dynamic(() => import("react-infinite-grid"), {
+//   ssr: false,
+//   loading: () => <p>...</p>,
+// })
 
 export const Home = () => {
   const [activeVideo, setActiveVideo] = useState(null)
@@ -26,9 +32,9 @@ export const Home = () => {
     info: { total, search_term },
     item: videosArray,
   } = data
-  useEffect(() => {
-    console.log(["isMobile", isMobile])
-  }, [isMobile])
+  // useEffect(() => {
+  //   console.log(["isMobile", isMobile])
+  // }, [isMobile])
 
   const toggleActive = ({ id }: TVideoItem) => {
     const isActiveVideo = activeVideo === id
@@ -60,6 +66,13 @@ export const Home = () => {
   const getActiveAdditional = ({ id }: TVideoItem) => {
     return activeAdditional === id
   }
+  const Example = (key) => {
+    return <div key={key}>111</div>
+  }
+  const itemsList = []
+  for (var i = 0; i <= 100000; i++) {
+    itemsList.push(<Example key={"example-" + i}>{`${i}+1`}</Example>)
+  }
   return (
     <Wrapper>
       <GlobalStyleReset />
@@ -78,14 +91,21 @@ export const Home = () => {
         <VideosContainer>
           <VideosList>
             {videosArray.map((item: TVideoItem) => (
-              <DynamicVideoItem
-                key={item.id}
-                video={item}
-                activeVideo={getActiveVideoState(item)}
-                activeAdditional={getActiveAdditional(item)}
-                handleClick={() => toggleActive(item)}
-                handleAdditional={() => toggleActiveAdditional(item)}
-              />
+              <LazyLoad
+                height={320}
+                offset={100}
+                placeholder={<PlaceholderVideo />}
+              >
+                <DynamicVideoItem
+                  key={item.id}
+                  video={item}
+                  activeVideo={getActiveVideoState(item)}
+                  activeAdditional={getActiveAdditional(item)}
+                  handleClick={() => toggleActive(item)}
+                  handleAdditional={() => toggleActiveAdditional(item)}
+                />
+                {/* <img src={item.picture[0].path} alt="" height="300" /> */}
+              </LazyLoad>
             ))}
           </VideosList>
         </VideosContainer>
@@ -96,6 +116,11 @@ export const Home = () => {
 }
 export default Home
 
+const TestImgContainer = styled.div(
+  (props) => css`
+    height: 300px;
+  `
+)
 const Wrapper = styled.div(
   (props) => css`
     display: flex;
@@ -104,6 +129,13 @@ const Wrapper = styled.div(
     justify-content: center;
     flex-direction: column;
     height: 100%;
+  `
+)
+const PlaceholderVideo = styled.div(
+  (props) => css`
+    height: 320px;
+    min-height: 320px;
+    width: 320px;
   `
 )
 const Container = styled.div(
@@ -171,17 +203,29 @@ const VideosContainer = styled.div(
     padding: 5px;
     background-color: #424245;
     /* overflow-y: auto; */
+    & > .infiniteList {
+      display: flex;
+      gap: 10px;
+      flex-flow: row wrap;
+      min-height: 100vh;
+    }
   `
 )
 
 const VideosList = styled.div(
   (props) => css`
-    display: flex;
-    gap: 10px;
-    flex-flow: row wrap;
+    display: grid;
+    gap: 15px;
+    justify-content: center;
+    grid-template-columns: 320px 320px 320px 320px;
+    /* flex-flow: row wrap; */
     min-height: 100vh;
     @media (max-width: 768px) {
-      justify-content: center;
+      grid-template-columns: 320px 320px;
+    }
+    @media (max-width: 480px) {
+      grid-template-columns: 320px;
+      gap: 5px;
     }
   `
 )
