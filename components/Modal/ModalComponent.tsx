@@ -1,6 +1,6 @@
 import { ReactChild } from "react"
 import Modal from "react-modal"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 Modal.setAppElement("#__next")
 const defaultStyle = {
   content: {
@@ -33,15 +33,17 @@ const ModalComponent = ({
   )
 }
 export default ModalComponent
-const BtnModalClose = styled.button`
-  background: #000;
-  color: #fff;
-  position: absolute;
-  border: none;
-  font-size: 32px;
-  right: 10px;
-  top: -8px;
-`
+const BtnModalClose = styled.button(
+  (props) => css`
+    background: #000;
+    color: #fff;
+    position: absolute;
+    border: none;
+    font-size: 32px;
+    right: 10px;
+    top: -8px;
+  `
+)
 ModalComponent.defaultProps = {
   isOpen: false,
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Head from "next/head"
 import { SITE_NAME, FOOTER_TEXT } from "../constants"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { GlobalStyleReset } from "../styles"
 import data from "../data"
 import numberFormatter from "../utils/numberFormatter"
@@ -90,84 +90,106 @@ export const Home = () => {
 }
 export default Home
 
-const Wrapper = styled.div`
-  display: flex;
-  background-color: #000;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100%;
-`
-const Container = styled.div`
-  display: flex;
-  width: 100%;
-  max-width: 1340px;
-  flex-direction: column;
-`
-
-const HeaderRow = styled.header`
-  color: #fff;
-  align-items: center;
-  justify-content: space-around;
-  height: 74px;
-  background: #424245;
-  width: 100%;
-  padding: 5px;
-`
-const InfoRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 50px;
-  color: #fff;
-  padding: 0 10px;
-`
-const InfoTagLabel = styled.div`
-  font-size: 20px;
-`
-
-const InfoTotalLabel = styled.div`
-  font-size: 14px;
-`
-
-const H1Title = styled.h1`
-  font-weight: 400;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 54px;
-  line-height: 63px;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`
-const MainTag = styled.span`
-  text-transform: uppercase;
-`
-const VideosContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 5px;
-  background-color: #424245;
-  /* overflow-y: auto; */
-`
-
-const VideosList = styled.div`
-  display: flex;
-  gap: 10px;
-  flex-flow: row wrap;
-  @media (max-width: 768px) {
+const Wrapper = styled.div(
+  (props) => css`
+    display: flex;
+    background-color: #000;
+    align-items: center;
     justify-content: center;
-  }
-`
+    flex-direction: column;
+    height: 100%;
+  `
+)
+const Container = styled.div(
+  (props) => css`
+    display: flex;
+    width: 100%;
+    max-width: 1340px;
+    flex-direction: column;
+  `
+)
 
-const FooterRow = styled.footer`
-  background: #000;
-  display: flex;
-  width: 100%;
-  color: #fff;
-  padding: 25px 5px;
-  align-items: center;
-  font-size: 14px;
-  @media (max-width: 768px) {
-    font-size: 10px;
-  }
-`
+const HeaderRow = styled.header(
+  (props) => css`
+    color: #fff;
+    align-items: center;
+    justify-content: space-around;
+    height: 74px;
+    background: #424245;
+    width: 100%;
+    padding: 5px;
+  `
+)
+const InfoRow = styled.div(
+  (props) => css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    color: #fff;
+    padding: 0 10px;
+  `
+)
+const InfoTagLabel = styled.div(
+  (props) => css`
+    font-size: 20px;
+  `
+)
+
+const InfoTotalLabel = styled.div(
+  (props) => css`
+    font-size: 14px;
+  `
+)
+
+const H1Title = styled.h1(
+  (props) => css`
+    font-weight: 400;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 54px;
+    line-height: 63px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  `
+)
+const MainTag = styled.span(
+  (props) => css`
+    text-transform: uppercase;
+  `
+)
+const VideosContainer = styled.div(
+  (props) => css`
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    background-color: #424245;
+    /* overflow-y: auto; */
+  `
+)
+
+const VideosList = styled.div(
+  (props) => css`
+    display: flex;
+    gap: 10px;
+    flex-flow: row wrap;
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+  `
+)
+
+const FooterRow = styled.footer(
+  (props) => css`
+    background: #000;
+    display: flex;
+    width: 100%;
+    color: #fff;
+    padding: 25px 5px;
+    align-items: center;
+    font-size: 14px;
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
+  `
+)
