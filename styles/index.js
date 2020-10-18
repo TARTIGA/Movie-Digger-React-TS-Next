@@ -1,6 +1,28 @@
 import { createGlobalStyle } from "styled-components"
 
 export const GlobalStyleReset = createGlobalStyle`
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../static/fonts/Roboto-Regular.ttf");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("../static/fonts/Roboto/Roboto-Medium.ttf");
+  font-style: medium;
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url('../static/fonts/Roboto/Roboto-Bold.ttf');
+  font-style: bold;
+  font-weight: 700;
+  font-display: swap;
+}
   /* box-sizing */
 *,
 *::before,
@@ -80,4 +102,5 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
 `

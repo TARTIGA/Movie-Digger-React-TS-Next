@@ -22,8 +22,10 @@ export const MyApp = ({ Component, pageProps }) => {
           content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,700&display=swap"
-          rel="stylesheet"
+          rel="preload"
+          href="../static/fonts/Roboto-Regular.ttf"
+          as="font"
+          crossOrigin=""
         />
       </Head>
       <Component {...pageProps} />
