@@ -61,6 +61,8 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   font-family: 'Roboto';
+  display: flex;
+  flex-direction: column;
 }
 
 /* clear lists styles */

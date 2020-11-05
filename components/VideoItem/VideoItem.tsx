@@ -14,8 +14,16 @@ import {
   VideoInfoAdditional,
   AdditionalRow,
   AdditionalLabel,
-  VideoPornstarItem,
+  VideoActorItem,
   VideWebcamItem,
+  CastItem,
+  Info,
+  BtnRow,
+  MoreBtn,
+  InfoAdditional,
+  ItemRoot,
+  ItemRootInModal,
+  DescriptionWrapped,
 } from "./styles"
 import type { TVideoItem } from "../../types"
 import Carousel from "react-multi-carousel"
@@ -35,19 +43,25 @@ export const VideoItem = ({
 }) => {
   const {
     id,
+    name,
     source,
-    added,
-    duration,
     description,
-    picture,
-    tag,
-    pornstar,
-    webcam,
-  }: TVideoItem = video
+    downloaded,
+    duration,
+    country,
+    directedBy,
+    producedBy,
+    musicBy,
+    company,
+    boxOffice,
+    cast,
+    images,
+    tags,
+  }: any = video
   const isMobile = useMedia({ maxWidth: 480 })
 
   /**
-   * Caroucel data
+   * Carousell init params
    */
   const responsive = {
     desktop: {
@@ -64,40 +78,60 @@ export const VideoItem = ({
     },
   }
   /**
-   * Render Info block (!Additional)
+   *Render Info block (!Additional)
+   *
+   * @return {*}
    */
   const renderInfoNormal = () => {
     return (
       <>
-        <VideoInfo>
-          <div>Added: {added}</div>
-          <div>Duration:{duration}</div>
-        </VideoInfo>
-        <VideoTitle>{description}</VideoTitle>
-        <VideoTags>
+        <Info>
+          <AdditionalRow>
+            {" "}
+            <AdditionalLabel>Title:</AdditionalLabel>"{name}"
+          </AdditionalRow>
+          <AdditionalRow>
+            {" "}
+            <AdditionalLabel>Description:</AdditionalLabel>
+            <DescriptionWrapped>{description}</DescriptionWrapped>
+          </AdditionalRow>
+          <AdditionalRow>
+            {" "}
+            <AdditionalLabel>Duration:</AdditionalLabel>
+            {duration}
+          </AdditionalRow>
+          <AdditionalRow>
+            {" "}
+            <AdditionalLabel>Country:</AdditionalLabel>
+            {country}
+          </AdditionalRow>
+        </Info>
+        {/* <VideoTags>
           {tag.map((item, idx) => (
             <VideoTagItem key={idx.toString()}>
               {firstLCapitalize(item)}
             </VideoTagItem>
           ))}
-        </VideoTags>
-        <VideoBtnRow>
-          <VideoMoreBtn onClick={handleAdditional}>More Info</VideoMoreBtn>
-        </VideoBtnRow>
+        </VideoTags> */}
+        <BtnRow>
+          <MoreBtn onClick={handleAdditional}>More Info</MoreBtn>
+        </BtnRow>
       </>
     )
   }
   /**
-   * Render Additional Info Block
+   *Render Additional Info Block
+   *
+   * @return {*}
    */
   const renderInfoAdditional = () => {
     return (
       <>
-        <VideoInfoAdditional>
+        <InfoAdditional>
           <AdditionalRow>
             {" "}
             <AdditionalLabel>Added:</AdditionalLabel>
-            {added}
+            {downloaded}
           </AdditionalRow>
           <AdditionalRow>
             {" "}
@@ -114,7 +148,7 @@ export const VideoItem = ({
             <AdditionalLabel>Description:</AdditionalLabel>
             {description}
           </AdditionalRow>
-          {!!tag.length && (
+          {/* {!!tag.length && (
             <AdditionalRow>
               {" "}
               <AdditionalLabel>Tags:</AdditionalLabel>
@@ -124,15 +158,15 @@ export const VideoItem = ({
                 </VideoTagItem>
               ))}
             </AdditionalRow>
-          )}
-          {!!pornstar.length && (
+          )} */}
+          {/* {!!cast.length && (
             <AdditionalRow>
               {" "}
-              <AdditionalLabel>Pornstars:</AdditionalLabel>
-              {pornstar.map((item, idx) => (
-                <VideoPornstarItem key={idx.toString()}>
+              <AdditionalLabel>Actors:</AdditionalLabel>
+              {cast.map((item, idx) => (
+                <CastItem key={idx.toString()}>
                   {firstLCapitalize(item)}
-                </VideoPornstarItem>
+                </CastItem>
               ))}
             </AdditionalRow>
           )}
@@ -146,28 +180,29 @@ export const VideoItem = ({
                 </VideWebcamItem>
               ))}
             </AdditionalRow>
-          )}
-          <VideoBtnRow>
-            <VideoMoreBtn onClick={handleAdditional}>Close Info</VideoMoreBtn>
-          </VideoBtnRow>
-        </VideoInfoAdditional>
+          )} */}
+          <BtnRow>
+            <MoreBtn onClick={handleAdditional}>Close Info</MoreBtn>
+          </BtnRow>
+        </InfoAdditional>
       </>
     )
   }
   /**
-   * Render Main Content Block
+   *Render Main Content Block
+   *
+   * @return {*}
    */
   const renderContent = () => {
     return (
-      <VideoItemRoot activeAdditional={activeAdditional} onClick={handleClick}>
-        <Carousel
+      <ItemRoot activeAdditional={activeAdditional} onClick={handleClick}>
+        {/* <Carousel
           responsive={responsive}
           ssr={false}
           draggable={false}
-          swipeable={isMobile}
+          swipeable={true}
           infinite={true}
           autoPlay={activeVideo}
-          arrows={false}
           autoPlaySpeed={1000}
           transitionDuration={200}
         >
@@ -178,24 +213,28 @@ export const VideoItem = ({
               key={id}
             />
           ))}
-        </Carousel>
+        </Carousel> */}
         {activeAdditional ? renderInfoAdditional() : renderInfoNormal()}
-      </VideoItemRoot>
+      </ItemRoot>
     )
   }
-  //Render content method
+  /**
+   *Render content in Modal method
+   *
+   * @return {*}
+   */
   const renderContentInModal = () => {
     return (
       <ModalComponent
         isOpen={activeAdditional}
         onRequestClose={handleAdditional}
       >
-        <VideoItemRootInModal
+        <ItemRootInModal
           activeAdditional={activeAdditional}
           onClick={handleClick}
         >
           {renderContent()}
-        </VideoItemRootInModal>
+        </ItemRootInModal>
       </ModalComponent>
     )
   }
