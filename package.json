@@ -6,7 +6,8 @@
     "dev": "next dev -p 8080",
     "build": "next build",
     "build-static": "next build && next export",
-    "start": "next start"
+    "start": "next start",
+    "deploy-ssr": "next build && next start"
   },
   "dependencies": {
     "next": "9.5.5",

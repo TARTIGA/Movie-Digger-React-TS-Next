@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useRouter } from "next/router"
 import Head from "next/head"
-import { GlobalStyleReset } from "../styles"
+import { GlobalStyleReset } from "../styles/globalStyles"
 import { SITE_NAME } from "../constants"
 import { Normalize } from "styled-normalize"
 

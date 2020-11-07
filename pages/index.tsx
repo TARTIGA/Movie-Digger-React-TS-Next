@@ -18,7 +18,7 @@ import {
   FooterRow,
   H1Title,
   Content,
-} from "./styles"
+} from "../components/pageStyles"
 
 const DynamicVideoItem = dynamic(
   () => import("../components/VideoItem/VideoItem"),
