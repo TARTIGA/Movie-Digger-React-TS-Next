@@ -99,6 +99,8 @@ export const Home = () => {
           <SearchInput
             value={search_term}
             onChange={handleSearch}
+            type="text"
+            id="searchInput"
           ></SearchInput>
         </SearchRow>
         <InfoRow>

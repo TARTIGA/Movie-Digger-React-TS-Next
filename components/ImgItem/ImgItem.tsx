@@ -5,7 +5,7 @@ import { LoaderImgItem, ImgSlideItem } from "./styles"
 const ImgItem = ({ src, alt }: TImgItemType) => {
   return (
     <LazyLoad height={200} placeholder={<LoaderImgItem />}>
-      <ImgSlideItem src={src} alt={alt} />
+      <ImgSlideItem src={src} alt={alt} width="320" height="300" />
     </LazyLoad>
   )
 }

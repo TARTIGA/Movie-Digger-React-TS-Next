@@ -34,7 +34,6 @@ export const VideoItem = ({
     name,
     source,
     description,
-    downloaded,
     duration,
     country,
     directedBy,
@@ -50,9 +49,9 @@ export const VideoItem = ({
   const isMobile = useMedia({ maxWidth: 480 })
 
   const tagsTypes = {
-    cast: "#f44336",
-    tag: "#757de8",
-    quality: "#2196f3",
+    cast: "#0e6d65",
+    tag: "#5157a0",
+    quality: "#15578d",
   }
 
   const getTagTypeColor = (type: string) => {

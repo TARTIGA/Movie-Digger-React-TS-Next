@@ -20,7 +20,7 @@ export const MyApp = ({ Component, pageProps }) => {
         <meta name="description" content={SITE_NAME} />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=5, viewport-fit=cover"
         />
         <link
           rel="preload"
