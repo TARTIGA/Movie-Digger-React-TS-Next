@@ -4,6 +4,7 @@ import Head from "next/head"
 import { GlobalStyleReset } from "../styles/globalStyles"
 import { SITE_NAME } from "../constants"
 import { Normalize } from "styled-normalize"
+import App from "next/app"
 
 export const MyApp = ({ Component, pageProps }) => {
   const { pathname } = useRouter()
@@ -28,18 +29,6 @@ export const MyApp = ({ Component, pageProps }) => {
           as="font"
           crossOrigin=""
         />
-        <link
-          rel="preload"
-          href="/fonts/Roboto-Bold.ttf"
-          as="font"
-          crossOrigin=""
-        />
-        <link
-          rel="preload"
-          href="/fonts/Roboto-Italic.ttf"
-          as="font"
-          crossOrigin=""
-        />
       </Head>
       <GlobalStyleReset />
       <Normalize />
@@ -47,11 +36,11 @@ export const MyApp = ({ Component, pageProps }) => {
     </>
   )
 }
-// MyApp.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
+MyApp.getInitialProps = async (appContext) => {
+  // calls page's `getInitialProps` and fills `appProps.pageProps`
+  const appProps = await App.getInitialProps(appContext)
 
-//   return { ...appProps }
-// }
+  return { ...appProps }
+}
 
 export default MyApp
