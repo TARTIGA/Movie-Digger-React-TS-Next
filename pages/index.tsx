@@ -118,7 +118,7 @@ export const Home = () => {
                 video={item}
                 activeVideo={getActiveVideoState(item)}
                 activeAdditional={getActiveAdditional(item)}
-                handleClick={() => toggleActive(item)}
+                handleClick={() => toggleActive(item.id)}
                 handleAdditional={() => toggleActiveAdditional(item)}
               />
             </LazyLoad>
