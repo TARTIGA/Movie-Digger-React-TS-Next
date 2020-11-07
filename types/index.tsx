@@ -8,6 +8,7 @@ export type TModalType = {
 
 export type TMovieItem = {
   id: number
+  name: string
   source: string
   description: string
   downloaded: string
@@ -16,10 +17,12 @@ export type TMovieItem = {
   producedBy: string
   musicBy: string
   company: string
+  country: string
   boxOffice: number
   cast: any[]
   images: any[]
   tags: any[]
+  quality: any[]
 }
 
 export type TImgItemType = {

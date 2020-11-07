@@ -8,6 +8,6 @@ export const LoaderImgItem = styled.div`
 `
 
 export const ImgSlideItem = styled.img`
-  /* height: 100px; */
+  height: 100%;
   cursor: pointer;
 `

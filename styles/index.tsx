@@ -10,14 +10,14 @@ export const GlobalStyleReset = createGlobalStyle`
   font-display: swap;
 }
 @font-face {
-  font-family: "Roboto";
+  font-family: "Roboto-Medium";
   src: url("../static/fonts/Roboto/Roboto-Medium.ttf");
   font-style: medium;
   font-weight: 500;
   font-display: swap;
 }
 @font-face {
-  font-family: "Roboto";
+  font-family: "Roboto-Bold";
   src: url('../static/fonts/Roboto/Roboto-Bold.ttf');
   font-style: bold;
   font-weight: 700;

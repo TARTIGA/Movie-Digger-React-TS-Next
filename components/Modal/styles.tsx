@@ -1,11 +1,11 @@
 import styled from "styled-components"
 
 export const BtnModalClose = styled.button`
-  background: #000;
+  background: transparent;
   color: #fff;
   position: absolute;
   border: none;
   font-size: 32px;
-  right: 10px;
+  right: 0px;
   top: -8px;
 `

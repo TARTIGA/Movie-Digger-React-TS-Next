@@ -19,6 +19,7 @@
     "react-modal": "^3.11.2",
     "react-multi-carousel": "^2.5.5",
     "styled-components": "^5.2.0",
+    "styled-normalize": "^8.0.7",
     "use-media": "^1.4.0"
   },
   "devDependencies": {

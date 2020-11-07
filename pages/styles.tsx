@@ -41,7 +41,7 @@ export const InfoTagLabel = styled.div`
 `
 
 export const InfoTotalLabel = styled.div`
-  font-size: 24px;
+  font-size: 1em;
 `
 
 export const H1Title = styled.h1`
@@ -101,10 +101,10 @@ export const HeaderRow = styled.header`
 export const Content = styled.main`
   color: #fafafa;
   background: #000; //#fafafa
-  width: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding-bottom: 30px;
 `
 
 export const FooterRow = styled.footer`

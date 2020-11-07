@@ -1,25 +1,21 @@
-import { useEffect, useState } from "react"
 import firstLCapitalize from "../../utils/firstLCapitalize"
 import useMedia from "use-media"
 import {
   AdditionalRow,
   AdditionalLabel,
-  CastItem,
   Info,
   BtnRow,
   MoreBtn,
-  InfoAdditional,
   ItemRoot,
-  ItemRootInModal,
   DescriptionWrapped,
   TagItem,
   TagList,
   CarouselContainer,
-  SliderIcon,
   PlayIcon,
+  ModalWrapper,
 } from "./styles"
 import { playBtn } from "../icons"
-import type { TVideoItem } from "../../types"
+import type { TMovieItem } from "../../types"
 import "react-multi-carousel/lib/styles.css"
 import dynamic from "next/dynamic"
 const ModalComponent = dynamic(() => import("../Modal/ModalComponent"), {
@@ -35,7 +31,6 @@ export const VideoItem = ({
   handleAdditional,
 }) => {
   const {
-    id,
     name,
     source,
     description,
@@ -50,8 +45,22 @@ export const VideoItem = ({
     cast,
     images,
     tags,
-  }: any = video
+    quality,
+  }: TMovieItem = video
   const isMobile = useMedia({ maxWidth: 480 })
+
+  const tagsTypes = {
+    cast: "#f44336",
+    tag: "#757de8",
+    quality: "#2196f3",
+  }
+
+  const getTagTypeColor = (type: string) => {
+    if (tagsTypes[type]) {
+      return tagsTypes[type]
+    }
+    return null
+  }
 
   /**
    * Carousell init params
@@ -79,63 +88,125 @@ export const VideoItem = ({
   const renderInfoNormal = (activeAdditional) => {
     return (
       <>
-        <Info>
+        <Info activeAdditional={activeAdditional}>
           <AdditionalRow>
             {" "}
             <AdditionalLabel>Title:</AdditionalLabel>"{name}"
           </AdditionalRow>
           <AdditionalRow>
             <AdditionalLabel>Description:</AdditionalLabel>
-            <DescriptionWrapped>{description}</DescriptionWrapped>
+            {activeAdditional ? (
+              description
+            ) : (
+              <DescriptionWrapped>{description}</DescriptionWrapped>
+            )}
           </AdditionalRow>
           <AdditionalRow>
             {" "}
             <AdditionalLabel>Duration:</AdditionalLabel>
             {duration}
           </AdditionalRow>
+          {!!cast.length && (
+            <AdditionalRow>
+              <AdditionalLabel>Cast:</AdditionalLabel>
+              {activeAdditional ? (
+                <>
+                  {cast.map(({ id, name }) => (
+                    <TagItem
+                      typeColor={getTagTypeColor("cast")}
+                      key={id.toString()}
+                    >
+                      {firstLCapitalize(name)}
+                    </TagItem>
+                  ))}
+                </>
+              ) : (
+                <TagList>
+                  {cast.map(({ id, name }) => (
+                    <TagItem
+                      typeColor={getTagTypeColor("cast")}
+                      key={id.toString()}
+                    >
+                      {firstLCapitalize(name)}
+                    </TagItem>
+                  ))}
+                </TagList>
+              )}
+            </AdditionalRow>
+          )}
           <AdditionalRow>
             {" "}
             <AdditionalLabel>Country:</AdditionalLabel>
             {country}
           </AdditionalRow>
-          {!!cast.length && (
-            <AdditionalRow>
-              <AdditionalLabel>Cast:</AdditionalLabel>
-              <TagList>
-                {cast.map(({ id, name }) => (
-                  <TagItem key={id.toString()}>
-                    {firstLCapitalize(name)}
-                  </TagItem>
-                ))}
-              </TagList>
-            </AdditionalRow>
-          )}
-          {!!tags.length && (
-            <AdditionalRow>
-              <AdditionalLabel>Tags:</AdditionalLabel>
-              <TagList>
-                {tags.map(({ id, label }) => (
-                  <TagItem key={id.toString()}>
-                    {firstLCapitalize(label)}
-                  </TagItem>
-                ))}
-              </TagList>
-            </AdditionalRow>
-          )}
+          <AdditionalRow>
+            {" "}
+            <AdditionalLabel>Quality:</AdditionalLabel>
+            <TagItem typeColor={getTagTypeColor("quality")}>{quality}</TagItem>
+          </AdditionalRow>
+          {activeAdditional ? (
+            <>
+              {!!tags.length && (
+                <AdditionalRow>
+                  <AdditionalLabel>Tags:</AdditionalLabel>
+                  <TagList>
+                    {tags.map(({ id, label }) => (
+                      <TagItem
+                        typeColor={getTagTypeColor("tag")}
+                        key={id.toString()}
+                      >
+                        {firstLCapitalize(label)}
+                      </TagItem>
+                    ))}
+                  </TagList>
+                </AdditionalRow>
+              )}{" "}
+              <AdditionalRow>
+                {" "}
+                <AdditionalLabel>Directed by:</AdditionalLabel>
+                {directedBy}
+              </AdditionalRow>
+              <AdditionalRow>
+                {" "}
+                <AdditionalLabel>Produced by:</AdditionalLabel>
+                {producedBy}
+              </AdditionalRow>
+              <AdditionalRow>
+                {" "}
+                <AdditionalLabel>Music by:</AdditionalLabel>
+                {musicBy}
+              </AdditionalRow>
+              <AdditionalRow>
+                {" "}
+                <AdditionalLabel>Company:</AdditionalLabel>
+                {company}
+              </AdditionalRow>
+              <AdditionalRow>
+                {" "}
+                <AdditionalLabel>Box office:</AdditionalLabel>
+                {boxOffice} $
+              </AdditionalRow>
+              <AdditionalRow>
+                {" "}
+                <AdditionalLabel>Source:</AdditionalLabel>
+                {source}
+              </AdditionalRow>
+            </>
+          ) : null}
+          <BtnRow>
+            <MoreBtn onClick={handleAdditional}>
+              {activeAdditional ? "Close Info" : "More Info"}
+            </MoreBtn>
+          </BtnRow>
+          <BtnRow>
+            <MoreBtn onClick={() => {}}>
+              Play{" "}
+              <PlayIcon viewBox="0 0 30 30" width={24} height={24}>
+                {playBtn}
+              </PlayIcon>
+            </MoreBtn>
+          </BtnRow>
         </Info>
-        <BtnRow>
-          <MoreBtn onClick={handleAdditional}>
-            {activeAdditional ? "Close Info" : "More Info"}
-          </MoreBtn>
-        </BtnRow>
-        <BtnRow>
-          <MoreBtn onClick={handleAdditional}>
-            Play{" "}
-            <PlayIcon viewBox="0 0 30 30" width={24} height={24}>
-              {playBtn}
-            </PlayIcon>
-          </MoreBtn>
-        </BtnRow>
       </>
     )
   }
@@ -150,21 +221,17 @@ export const VideoItem = ({
         <CarouselContainer
           active={activeAdditional}
           responsive={responsive}
-          ssr={false}
+          ssr={true}
           draggable={false}
           swipeable={true}
           infinite={true}
           autoPlay={activeVideo}
           autoPlaySpeed={1000}
-          transitionDuration={200}
+          transitionDuration={300}
           arrows={false}
         >
-          {images.map(({ id, path }) => (
-            <ImgItemComponent
-              src={path}
-              alt={`${description}-${id}`}
-              key={id}
-            />
+          {images.map(({ id, src }) => (
+            <ImgItemComponent src={src} alt={`${description}-${id}`} key={id} />
           ))}
         </CarouselContainer>
         {renderInfoNormal(activeAdditional)}
@@ -182,12 +249,7 @@ export const VideoItem = ({
         isOpen={activeAdditional}
         onRequestClose={handleAdditional}
       >
-        <ItemRootInModal
-          activeAdditional={activeAdditional}
-          onClick={handleClick}
-        >
-          {renderContent()}
-        </ItemRootInModal>
+        <ModalWrapper>{renderContent()}</ModalWrapper>
       </ModalComponent>
     )
   }

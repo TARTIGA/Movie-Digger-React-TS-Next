@@ -1,8 +1,9 @@
 import { useEffect } from "react"
 import { useRouter } from "next/router"
 import Head from "next/head"
-// import App from 'next/app'
+import { GlobalStyleReset } from "../styles"
 import { SITE_NAME } from "../constants"
+import { Normalize } from "styled-normalize"
 
 export const MyApp = ({ Component, pageProps }) => {
   const { pathname } = useRouter()
@@ -28,6 +29,8 @@ export const MyApp = ({ Component, pageProps }) => {
           crossOrigin=""
         />
       </Head>
+      <GlobalStyleReset />
+      <Normalize />
       <Component {...pageProps} />
     </>
   )

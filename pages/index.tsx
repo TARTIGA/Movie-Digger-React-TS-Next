@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { SITE_NAME, FOOTER_TEXT } from "../constants"
-import { GlobalStyleReset } from "../styles"
 import data from "../data"
 import numberFormatter from "../utils/numberFormatter"
 import type { TMovieItem } from "../types"
@@ -13,14 +12,11 @@ import {
   InfoRow,
   SearchRow,
   SearchInput,
-  InfoTagLabel,
   InfoTotalLabel,
-  InnerContainer,
   List,
   PlaceholderVideo,
   FooterRow,
   H1Title,
-  SearchTerm,
   Content,
 } from "./styles"
 
@@ -95,7 +91,6 @@ export const Home = () => {
 
   return (
     <>
-      <GlobalStyleReset />
       <HeaderRow>
         <H1Title>{SITE_NAME}</H1Title>
       </HeaderRow>

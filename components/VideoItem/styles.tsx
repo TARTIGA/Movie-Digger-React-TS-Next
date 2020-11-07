@@ -3,18 +3,28 @@ import Carousel from "react-multi-carousel"
 
 export const ItemRoot = styled.div`
   display: flex;
-  width: 100%;
-  max-width: 320px;
-  float: left;
-  /* height: 320px; */
   color: #fff;
   flex-direction: column;
   background-color: ${(props) => (props.activeAdditional ? "#000" : "none")};
   outline: ${(props) => (props.activeAdditional ? " 1px solid red" : "none")};
   outline-offset: 1px;
-  box-sizing: content-box;
   padding: 5px;
-  margin-bottom: 20px;
+  max-width: 320px;
+  overflow-y: ${(props) => (props.activeAdditional ? "scroll" : "inherit")};
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: #000;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #cacaca;
+    border-radius: 6px;
+  }
+
+  @media (max-width: 480px) {
+    outline: none;
+    padding: 10px;
+  }
 `
 
 export const CarouselContainer = styled(Carousel)`
@@ -23,9 +33,9 @@ export const CarouselContainer = styled(Carousel)`
   }
 `
 
-export const ItemRootInModal = styled(ItemRoot)`
-  border: none;
-  padding: 15px;
+export const ModalWrapper = styled.div`
+  padding: 10px;
+  width: 280px;
 `
 
 export const Images = styled.div`
@@ -52,7 +62,7 @@ export const PlayIcon = styled.svg`
 
 export const AdditionalLabel = styled.span`
   margin-right: 5px;
-  font-style: bold;
+  font-weight: 700;
 `
 
 export const Info = styled.div`
@@ -61,7 +71,8 @@ export const Info = styled.div`
   justify-content: start;
   font-size: 14px;
   font-weight: 400;
-  margin-top: 10px;
+  margin-top: 15px;
+  height: 340px;
 `
 export const DescriptionWrapped = styled.div`
   display: flex;
@@ -76,7 +87,6 @@ export const DescriptionWrapped = styled.div`
 `
 export const TagList = styled.div`
   display: flex;
-  margin-bottom: 15px;
   overflow: hidden;
   @media (max-width: 768px) {
     display: none;
@@ -85,12 +95,12 @@ export const TagList = styled.div`
 export const TagItem = styled.div`
   padding: 3px;
   border-radius: 4px;
-  background: #646464;
   max-height: 24px;
   text-align: center;
   display: inline-block;
   font-size: 14px;
   margin: 3px;
+  background-color: ${(props) => props.typeColor || "#646464"};
 `
 export const MovieTagItem = styled(TagItem)`
   background: #646464;
