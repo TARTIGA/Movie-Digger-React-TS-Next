@@ -34,7 +34,7 @@ export const InfoRow = styled.div`
   align-items: center;
   height: 50px;
   color: #fff;
-  background: #3949ab;
+  background: #000; //3949ab
   padding: 0 10px;
   justify-content: center;
 `
@@ -93,7 +93,7 @@ export const List = styled.div`
 export const HeaderRow = styled.header`
   color: #fff;
   height: 120px;
-  background: #3949ab;
+  background: #000; //3949ab
   padding: 5px;
   width: 100%;
   display: flex;
