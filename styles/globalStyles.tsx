@@ -8,18 +8,6 @@ export const GlobalStyleReset = createGlobalStyle`
   font-style: normal;
   font-weight: normal;
 }
-@font-face {
-  font-family: "Roboto";
-  src: url('/fonts/Roboto/Roboto-Italic.ttf') format("truetype");
-  font-style: italic;
-  font-weight: normal;
-}
-@font-face {
-  font-family: "Roboto";
-  src: url('/fonts/Roboto/Roboto-Bold.ttf') format("truetype");
-  font-style: normal;
-  font-weight: bold;
-}
   /* box-sizing */
 *,
 *::before,
