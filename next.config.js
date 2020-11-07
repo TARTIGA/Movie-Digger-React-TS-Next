@@ -10,8 +10,7 @@ module.exports = withPlugins([
   ],
   withImages,
 ])
-// module.exports = withImages({
-//   webpack(config, options) {
-//     return config
-//   },
-// })
+module.exports = {
+  // Target must be serverless
+  target: "serverless",
+}
