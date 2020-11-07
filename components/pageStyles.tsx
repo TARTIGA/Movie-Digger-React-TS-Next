@@ -14,7 +14,6 @@ export const SearchRow = styled.div`
   align-items: center;
   justify-content: space-between;
   color: #fff;
-  background: #a5a5a5;
   padding: 10px;
 `
 
@@ -32,7 +31,7 @@ export const InfoRow = styled.div`
   align-items: center;
   height: 50px;
   color: #fff;
-  background: #737373;
+  background: #3949ab;
   padding: 0 10px;
   justify-content: center;
 `

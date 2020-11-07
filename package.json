@@ -6,6 +6,7 @@
     "dev": "next dev -p 8080",
     "build": "next build",
     "start": "next start",
+    "build-ssr":"next build && next start",
     "deploy-static": "next build && next export",
     "postbuild": "next-on-netlify"
   },
