@@ -4,6 +4,7 @@ import Carousel from "react-multi-carousel"
 export const ItemRoot = styled.div`
   display: flex;
   color: #fff;
+  background-color: #000;
   flex-direction: column;
   background-color: ${(props) => (props.activeAdditional ? "#000" : "none")};
   outline: ${(props) => (props.activeAdditional ? " 1px solid red" : "none")};
@@ -23,7 +24,7 @@ export const ItemRoot = styled.div`
 
   @media (max-width: 480px) {
     outline: none;
-    padding: 10px;
+    padding: 20px 10px;
   }
 `
 
@@ -34,8 +35,7 @@ export const CarouselContainer = styled(Carousel)`
 `
 
 export const ModalWrapper = styled.div`
-  padding: 10px;
-  width: 280px;
+  width: 100%;
 `
 
 export const Images = styled.div`
@@ -57,12 +57,12 @@ export const PlayIcon = styled.svg`
   width: ${({ width }) => `${width}px`};
   height: ${({ height }) => `${height}px`};
   fill: #fff;
-  margin-left: 5px;
+  margin-right: 10px;
 `
 
 export const AdditionalLabel = styled.span`
   margin-right: 5px;
-  font-weight: 700;
+  font-weight: bold;
 `
 
 export const Info = styled.div`
@@ -74,16 +74,12 @@ export const Info = styled.div`
   margin-top: 15px;
   height: 340px;
 `
-export const DescriptionWrapped = styled.div`
-  display: flex;
-  font-size: 14px;
-  font-weight: 400;
-  text-overflow: ellipsis;
+
+// It IS can totaly destroyed your perfomance (accessibility)  width: 280px;
+export const DescriptionWrapped = styled.p`
+  /* text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
-  align-items: center;
-  display: inline-block;
-  width: 100%;
+  overflow: hidden; */
 `
 export const TagList = styled.div`
   display: flex;
@@ -120,7 +116,7 @@ export const MoreBtn = styled.button`
   border-radius: 3px;
   width: 100%;
   height: 42px;
-  font-size: 14px;
+  font-size: 1em;
   color: #fff;
   display: flex;
   align-items: center;
@@ -131,8 +127,8 @@ export const MoreBtn = styled.button`
     background: #525252;
   }
   @media (max-width: 768px) {
-    font-size: 20px;
     height: 42px;
+    font-size: 1.5em;
   }
 `
 export const ImgContainer = styled.div`

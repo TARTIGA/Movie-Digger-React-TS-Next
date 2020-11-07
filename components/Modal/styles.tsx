@@ -6,6 +6,6 @@ export const BtnModalClose = styled.button`
   position: absolute;
   border: none;
   font-size: 32px;
-  right: 0px;
-  top: -8px;
+  right: 25px;
+  top: -4px;
 `

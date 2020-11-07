@@ -4,24 +4,21 @@ export const GlobalStyleReset = createGlobalStyle`
 
 @font-face {
   font-family: "Roboto";
-  src: url('/fonts/Roboto-Regular.ttf');
+  src: url('/fonts/Roboto-Regular.ttf') format("truetype");
   font-style: normal;
-  font-weight: 400;
-  font-display: swap;
+  font-weight: normal;
 }
 @font-face {
-  font-family: "Roboto-Medium";
-  src: url('/fonts/Roboto/Roboto-Medium.ttf');
-  font-style: medium;
-  font-weight: 500;
-  font-display: swap;
+  font-family: "Roboto";
+  src: url('/fonts/Roboto/Roboto-Italic.ttf') format("truetype");
+  font-style: italic;
+  font-weight: normal;
 }
 @font-face {
-  font-family: "Roboto-Bold";
-  src: url('/fonts/Roboto/Roboto-Bold.ttf');
-  font-style: bold;
-  font-weight: 700;
-  font-display: swap;
+  font-family: "Roboto";
+  src: url('/fonts/Roboto/Roboto-Bold.ttf') format("truetype");
+  font-style: normal;
+  font-weight: bold;
 }
   /* box-sizing */
 *,
@@ -58,9 +55,8 @@ dd {
 body {
   min-height: 100vh;
   scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
   line-height: 1.5;
-  font-family: 'Roboto';
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
 }
@@ -92,17 +88,6 @@ input,
 button,
 textarea,
 select {
-  font: inherit;
+  /* font: inherit; */
 } 
-
-/* disable defaults animations */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
 `

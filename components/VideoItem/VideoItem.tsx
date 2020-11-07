@@ -22,6 +22,7 @@ const ModalComponent = dynamic(() => import("../Modal/ModalComponent"), {
   loading: () => <p>...</p>,
 })
 import ImgItemComponent from "../ImgItem/ImgItem"
+import truncateString from "../../utils/truncateString"
 
 export const VideoItem = ({
   video,
@@ -89,7 +90,6 @@ export const VideoItem = ({
       <>
         <Info activeAdditional={activeAdditional}>
           <AdditionalRow>
-            {" "}
             <AdditionalLabel>Title:</AdditionalLabel>"{name}"
           </AdditionalRow>
           <AdditionalRow>
@@ -97,7 +97,10 @@ export const VideoItem = ({
             {activeAdditional ? (
               description
             ) : (
-              <DescriptionWrapped>{description}</DescriptionWrapped>
+              <DescriptionWrapped>
+                {/* Hack word-wrap bag on SSR */}
+                {truncateString(description)}
+              </DescriptionWrapped>
             )}
           </AdditionalRow>
           <AdditionalRow>
@@ -199,10 +202,10 @@ export const VideoItem = ({
           </BtnRow>
           <BtnRow>
             <MoreBtn onClick={() => {}}>
-              Play{" "}
               <PlayIcon viewBox="0 0 30 30" width={24} height={24}>
                 {playBtn}
               </PlayIcon>
+              Play{" "}
             </MoreBtn>
           </BtnRow>
         </Info>

@@ -36,38 +36,29 @@ export const Home = () => {
   const isMobile = useMedia({ maxWidth: 480 })
   const { total, search_term, items } = data
 
-  useEffect(() => {
-    console.log(["INIT FETCH"])
-  }, [])
+  // useEffect(() => {
+  //   console.log(["INIT FETCH"])
+  // }, [])
 
   /**
    * ToggleActive video card method
    * @param TMovieItem
    */
-  const toggleActive = ({ id }: TMovieItem) => {
+  const toggleActive = (id: number) => {
     const isActiveVideo = activeVideo === id
-    if (isActiveVideo) {
-      setActiveVideo(null)
-    } else {
-      setActiveVideo(id)
-    }
+    setActiveVideo(isActiveVideo ? null : id)
   }
   /**
    * Toggle Active additional info (More Info btn)
    * @param item
    */
-  const toggleActiveAdditional = (item) => {
-    toggleActive(item)
+  const toggleActiveAdditional = ({ id }: TMovieItem) => {
+    toggleActive(id)
     if (isMobile) {
       toggle()
     }
-    const { id } = item
-    const isActiveAdditional = activeVideo === id
-    if (isActiveAdditional) {
-      setActiveAdditional(null)
-    } else {
-      setActiveAdditional(id)
-    }
+    const isActiveAdditional = activeAdditional === id
+    setActiveAdditional(isActiveAdditional ? null : id)
   }
   /**
    * Getter Active video check

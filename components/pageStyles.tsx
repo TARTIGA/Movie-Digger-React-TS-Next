@@ -85,15 +85,16 @@ export const List = styled.div`
   place-content: center center;
   grid-template-columns: repeat(auto-fill, 320px);
   min-height: 100vh;
+  background: #000;
   @media (max-width: 480px) {
-    gap: 5px;
+    gap: 10px;
   }
 `
 
 export const HeaderRow = styled.header`
   color: #fff;
   height: 120px;
-  background: #000; //3949ab
+  background: #3949ab;
   padding: 5px;
   width: 100%;
   display: flex;
@@ -102,7 +103,7 @@ export const HeaderRow = styled.header`
 `
 export const Content = styled.main`
   color: #fafafa;
-  background: #000; //#fafafa
+  background: #3949ab;
   display: flex;
   justify-content: center;
   flex-direction: column;

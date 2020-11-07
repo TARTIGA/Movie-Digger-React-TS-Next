@@ -30,13 +30,13 @@ export const MyApp = ({ Component, pageProps }) => {
         />
         <link
           rel="preload"
-          href="/fonts/Roboto-Medium.ttf"
+          href="/fonts/Roboto-Bold.ttf"
           as="font"
           crossOrigin=""
         />
         <link
           rel="preload"
-          href="/fonts//Roboto-Bold.ttf"
+          href="/fonts/Roboto-Italic.ttf"
           as="font"
           crossOrigin=""
         />
