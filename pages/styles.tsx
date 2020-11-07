@@ -77,17 +77,13 @@ export const InnerContainer = styled.div`
 `
 
 export const List = styled.div`
+  margin-top: 20px;
   display: grid;
   gap: 15px;
-  justify-content: center;
-  grid-template-columns: 320px 320px 320px 320px;
-  /* flex-flow: row wrap; */
+  place-content: center center;
+  grid-template-columns: repeat(auto-fill, 320px);
   min-height: 100vh;
-  @media (max-width: 768px) {
-    grid-template-columns: 320px 320px;
-  }
   @media (max-width: 480px) {
-    grid-template-columns: 320px;
     gap: 5px;
   }
 `
@@ -100,7 +96,7 @@ export const HeaderRow = styled.header`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  place-content: center center;
 `
 export const Content = styled.main`
   color: #fafafa;

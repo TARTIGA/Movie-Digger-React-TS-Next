@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Carousel from "react-multi-carousel"
 
 export const ItemRoot = styled.div`
   display: flex;
@@ -9,10 +10,17 @@ export const ItemRoot = styled.div`
   color: #fff;
   flex-direction: column;
   background-color: ${(props) => (props.activeAdditional ? "#000" : "none")};
-  border: ${(props) => (props.activeAdditional ? " 1px solid red" : "none")};
+  outline: ${(props) => (props.activeAdditional ? " 1px solid red" : "none")};
+  outline-offset: 1px;
   box-sizing: content-box;
-  padding: ${(props) => (props.activeAdditional ? "5px" : "0")};
+  padding: 5px;
   margin-bottom: 20px;
+`
+
+export const CarouselContainer = styled(Carousel)`
+  &:hover {
+    outline: 1px solid #9ff7fd;
+  }
 `
 
 export const ItemRootInModal = styled(ItemRoot)`
@@ -28,12 +36,18 @@ export const InfoAdditional = styled.div`
   display: flex;
   padding: 20px 0;
   flex-direction: column;
-  position: absolute;
   height: 100%;
   font-size: 14px;
 `
 export const AdditionalRow = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+`
+
+export const PlayIcon = styled.svg`
+  width: ${({ width }) => `${width}px`};
+  height: ${({ height }) => `${height}px`};
+  fill: #fff;
+  margin-left: 5px;
 `
 
 export const AdditionalLabel = styled.span`
@@ -47,7 +61,7 @@ export const Info = styled.div`
   justify-content: start;
   font-size: 14px;
   font-weight: 400;
-  margin-top: 5px;
+  margin-top: 10px;
 `
 export const DescriptionWrapped = styled.div`
   display: flex;
@@ -84,14 +98,12 @@ export const MovieTagItem = styled(TagItem)`
 export const CastItem = styled(TagItem)`
   background: #0959cf;
 `
-export const VideWebcamItem = styled(TagItem)`
-  background: #32a567;
-`
 export const BtnRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-bottom: 10px;
 `
 export const MoreBtn = styled.button`
   background: #2c2c2f;
@@ -105,6 +117,9 @@ export const MoreBtn = styled.button`
   justify-content: center;
   border: none;
   cursor: pointer;
+  &:hover {
+    background: #525252;
+  }
   @media (max-width: 768px) {
     font-size: 20px;
     height: 42px;

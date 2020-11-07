@@ -112,7 +112,7 @@ export const Home = () => {
           </InfoTotalLabel>
         </InfoRow>
         <List>
-          {items.map((item: TMovieItem) => (
+          {items.map((item: any) => (
             <LazyLoad
               height={320}
               offset={100}

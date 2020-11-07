@@ -2,20 +2,8 @@ import { useEffect, useState } from "react"
 import firstLCapitalize from "../../utils/firstLCapitalize"
 import useMedia from "use-media"
 import {
-  VideoItemRoot,
-  VideoInfo,
-  VideoTitle,
-  VideoTags,
-  VideoTagItem,
-  VideoBtnRow,
-  VideoMoreBtn,
-  AdditionalInfo,
-  VideoItemRootInModal,
-  VideoInfoAdditional,
   AdditionalRow,
   AdditionalLabel,
-  VideoActorItem,
-  VideWebcamItem,
   CastItem,
   Info,
   BtnRow,
@@ -24,9 +12,14 @@ import {
   ItemRoot,
   ItemRootInModal,
   DescriptionWrapped,
+  TagItem,
+  TagList,
+  CarouselContainer,
+  SliderIcon,
+  PlayIcon,
 } from "./styles"
+import { playBtn } from "../icons"
 import type { TVideoItem } from "../../types"
-import Carousel from "react-multi-carousel"
 import "react-multi-carousel/lib/styles.css"
 import dynamic from "next/dynamic"
 const ModalComponent = dynamic(() => import("../Modal/ModalComponent"), {
@@ -78,11 +71,12 @@ export const VideoItem = ({
     },
   }
   /**
-   *Render Info block (!Additional)
+   *Render Item Content
    *
+   * @param {*} activeAdditional
    * @return {*}
    */
-  const renderInfoNormal = () => {
+  const renderInfoNormal = (activeAdditional) => {
     return (
       <>
         <Info>
@@ -91,7 +85,6 @@ export const VideoItem = ({
             <AdditionalLabel>Title:</AdditionalLabel>"{name}"
           </AdditionalRow>
           <AdditionalRow>
-            {" "}
             <AdditionalLabel>Description:</AdditionalLabel>
             <DescriptionWrapped>{description}</DescriptionWrapped>
           </AdditionalRow>
@@ -105,86 +98,44 @@ export const VideoItem = ({
             <AdditionalLabel>Country:</AdditionalLabel>
             {country}
           </AdditionalRow>
-        </Info>
-        {/* <VideoTags>
-          {tag.map((item, idx) => (
-            <VideoTagItem key={idx.toString()}>
-              {firstLCapitalize(item)}
-            </VideoTagItem>
-          ))}
-        </VideoTags> */}
-        <BtnRow>
-          <MoreBtn onClick={handleAdditional}>More Info</MoreBtn>
-        </BtnRow>
-      </>
-    )
-  }
-  /**
-   *Render Additional Info Block
-   *
-   * @return {*}
-   */
-  const renderInfoAdditional = () => {
-    return (
-      <>
-        <InfoAdditional>
-          <AdditionalRow>
-            {" "}
-            <AdditionalLabel>Added:</AdditionalLabel>
-            {downloaded}
-          </AdditionalRow>
-          <AdditionalRow>
-            {" "}
-            <AdditionalLabel>Duration:</AdditionalLabel>
-            {duration}
-          </AdditionalRow>
-          <AdditionalRow>
-            {" "}
-            <AdditionalLabel>Source:</AdditionalLabel>
-            {source}
-          </AdditionalRow>
-          <AdditionalRow>
-            {" "}
-            <AdditionalLabel>Description:</AdditionalLabel>
-            {description}
-          </AdditionalRow>
-          {/* {!!tag.length && (
+          {!!cast.length && (
             <AdditionalRow>
-              {" "}
-              <AdditionalLabel>Tags:</AdditionalLabel>
-              {tag.map((item, idx) => (
-                <VideoTagItem key={idx.toString()}>
-                  {firstLCapitalize(item)}
-                </VideoTagItem>
-              ))}
-            </AdditionalRow>
-          )} */}
-          {/* {!!cast.length && (
-            <AdditionalRow>
-              {" "}
-              <AdditionalLabel>Actors:</AdditionalLabel>
-              {cast.map((item, idx) => (
-                <CastItem key={idx.toString()}>
-                  {firstLCapitalize(item)}
-                </CastItem>
-              ))}
+              <AdditionalLabel>Cast:</AdditionalLabel>
+              <TagList>
+                {cast.map(({ id, name }) => (
+                  <TagItem key={id.toString()}>
+                    {firstLCapitalize(name)}
+                  </TagItem>
+                ))}
+              </TagList>
             </AdditionalRow>
           )}
-          {!!webcam.length && (
+          {!!tags.length && (
             <AdditionalRow>
-              {" "}
-              <AdditionalLabel>Webcam Model:</AdditionalLabel>
-              {webcam.map((item, idx) => (
-                <VideWebcamItem key={idx.toString()}>
-                  {firstLCapitalize(item)}
-                </VideWebcamItem>
-              ))}
+              <AdditionalLabel>Tags:</AdditionalLabel>
+              <TagList>
+                {tags.map(({ id, label }) => (
+                  <TagItem key={id.toString()}>
+                    {firstLCapitalize(label)}
+                  </TagItem>
+                ))}
+              </TagList>
             </AdditionalRow>
-          )} */}
-          <BtnRow>
-            <MoreBtn onClick={handleAdditional}>Close Info</MoreBtn>
-          </BtnRow>
-        </InfoAdditional>
+          )}
+        </Info>
+        <BtnRow>
+          <MoreBtn onClick={handleAdditional}>
+            {activeAdditional ? "Close Info" : "More Info"}
+          </MoreBtn>
+        </BtnRow>
+        <BtnRow>
+          <MoreBtn onClick={handleAdditional}>
+            Play{" "}
+            <PlayIcon viewBox="0 0 30 30" width={24} height={24}>
+              {playBtn}
+            </PlayIcon>
+          </MoreBtn>
+        </BtnRow>
       </>
     )
   }
@@ -196,7 +147,8 @@ export const VideoItem = ({
   const renderContent = () => {
     return (
       <ItemRoot activeAdditional={activeAdditional} onClick={handleClick}>
-        {/* <Carousel
+        <CarouselContainer
+          active={activeAdditional}
           responsive={responsive}
           ssr={false}
           draggable={false}
@@ -205,16 +157,17 @@ export const VideoItem = ({
           autoPlay={activeVideo}
           autoPlaySpeed={1000}
           transitionDuration={200}
+          arrows={false}
         >
-          {picture.map(({ id, path }) => (
+          {images.map(({ id, path }) => (
             <ImgItemComponent
               src={path}
               alt={`${description}-${id}`}
               key={id}
             />
           ))}
-        </Carousel> */}
-        {activeAdditional ? renderInfoAdditional() : renderInfoNormal()}
+        </CarouselContainer>
+        {renderInfoNormal(activeAdditional)}
       </ItemRoot>
     )
   }
