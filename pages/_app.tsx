@@ -24,7 +24,7 @@ export const MyApp = ({ Component, pageProps }) => {
         />
         <link
           rel="preload"
-          href="../static/fonts/Roboto-Regular.ttf"
+          href="/static/fonts/Roboto-Regular.ttf"
           as="font"
           crossOrigin=""
         />
