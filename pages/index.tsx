@@ -35,6 +35,10 @@ export const Home = () => {
   const isMobile = useMedia({ maxWidth: 480 })
   const { total, search_term, items } = data
 
+  useEffect(() => {
+    console.log(["INIT FETCH"])
+  }, [])
+
   /**
    * ToggleActive video card method
    * @param TMovieItem
@@ -109,7 +113,7 @@ export const Home = () => {
           </InfoTotalLabel>
         </InfoRow>
         <List>
-          {items.map((item: any) => (
+          {items.map((item: TMovieItem) => (
             <LazyLoad
               height={320}
               offset={100}

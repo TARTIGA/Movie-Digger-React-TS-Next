@@ -22,7 +22,7 @@ export type TMovieItem = {
   cast: any[]
   images: any[]
   tags: any[]
-  quality: any[]
+  quality: string
 }
 
 export type TImgItemType = {
