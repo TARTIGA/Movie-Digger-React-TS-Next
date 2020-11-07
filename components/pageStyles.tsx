@@ -16,6 +16,9 @@ export const SearchRow = styled.div`
   color: #fff;
   padding: 10px;
 `
+export const EmptyLabel = styled.label`
+  width: 100%;
+`
 
 export const SearchInput = styled.input`
   padding: 0 10px;

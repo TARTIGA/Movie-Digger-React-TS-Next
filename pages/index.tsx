@@ -12,6 +12,7 @@ import {
   InfoRow,
   SearchRow,
   SearchInput,
+  EmptyLabel,
   InfoTotalLabel,
   List,
   PlaceholderVideo,
@@ -100,12 +101,14 @@ export const Home = () => {
       </HeaderRow>
       <Content>
         <SearchRow>
-          <SearchInput
-            value={search_term}
-            onChange={handleSearch}
-            type="text"
-            id="searchInput"
-          ></SearchInput>
+          <EmptyLabel htmlFor="searchInput">
+            <SearchInput
+              value={search_term}
+              onChange={handleSearch}
+              type="text"
+              id="searchInput"
+            ></SearchInput>
+          </EmptyLabel>
         </SearchRow>
         <InfoRow>
           <InfoTotalLabel>
